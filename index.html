@@ -70,12 +70,12 @@
     <header>
         <h1>Christian Descoteaux</h1>
         <h2>Spécialiste en Antifragilité Financière</h2> 
-<!-- Élément pour afficher le cours du Bitcoin -->
+        <!-- Élément pour afficher le cours du Bitcoin -->
         <p id="bitcoin-price">Chargement du cours du Bitcoin...</p>
         <img src="IMG_7268.jpeg" alt="Photo de Christian Descoteaux" width="150">
     </header>
 
-        <script>
+    <script>
         window.onload = function() {
             // Récupérer le cours du Bitcoin depuis l'API de CoinGecko
             fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
@@ -88,7 +88,6 @@
                 .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
         }
     </script>
-
 
     <div class="container">
         <section>
@@ -133,11 +132,7 @@
             <h3>Performance</h3>
             <p>Pour consulter la performance de votre  <a href="performance.html">portefeuille sur les 3 dernières années.</a>.</p>
         </section>
-    </div>
-
-    <footer>
-        <p>© 2024 Christian Descoteaux</p>
-    </footer>
-
-</body>
-</html>
+        <!-- Ajout du lien vers la page des classes d'actifs -->
+        <section>
+            <h3>Classes d'Actifs</h3>
+            <p>Pour découvrir <a href="classe_actifs.html">les recommandations de répartition.</a>.</p>

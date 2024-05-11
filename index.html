@@ -69,9 +69,26 @@
 
     <header>
         <h1>Christian Descoteaux</h1>
-        <h2>Spécialiste en Antifragilité Financière</h2>
+        <h2>Spécialiste en Antifragilité Financière</h2> 
+<!-- Élément pour afficher le cours du Bitcoin -->
+        <p id="bitcoin-price">Chargement du cours du Bitcoin...</p>
         <img src="IMG_7268.jpeg" alt="Photo de Christian Descoteaux" width="150">
     </header>
+
+        <script>
+        window.onload = function() {
+            // Récupérer le cours du Bitcoin depuis l'API de CoinGecko
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+                .then(response => response.json())
+                .then(data => {
+                    const bitcoinPrice = data.bitcoin.usd;
+                    // Afficher le cours du Bitcoin dans l'élément avec l'ID "bitcoin-price"
+                    document.getElementById('bitcoin-price').innerText = `Cours du Bitcoin : $${bitcoinPrice}`;
+                })
+                .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
+        }
+    </script>
+
 
     <div class="container">
         <section>

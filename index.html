@@ -4,66 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christian Descoteaux - Spécialiste en Antifragilité Financière</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            color: #007bff;
-        }
-        p {
-            line-height: 1.6;
-        }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            background-color: #007bff;
-            color: #fff;
-        }
-        .testimonial {
-            margin: 20px 0;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border-left: 4px solid #007bff;
-        }
-        .testimonial p {
-            margin: 0;
-        }
-        .back-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -83,7 +24,7 @@
                 .then(data => {
                     const bitcoinPrice = data.bitcoin.usd;
                     // Afficher le cours du Bitcoin dans l'élément avec l'ID "bitcoin-price"
-                    document.getElementById('bitcoin-price').innerText = `Cours du Bitcoin : $${bitcoinPrice}`;
+                    document.getElementById('bitcoin-price').innerText = `Prix du Bitcoin : $${bitcoinPrice}`;
                 })
                 .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
         }
@@ -93,6 +34,11 @@
         <section>
             <h3>À propos de moi</h3>
             <p>Bonjour, je suis Christian Descoteaux, spécialisé dans le concept d'antifragilité financière. L'antifragilité va au-delà de la simple résilience ; elle consiste à tirer profit des chocs et des incertitudes pour renforcer et améliorer votre position financière.</p>
+        </section>
+        <section>
+            <h3>Présentation</h3>
+            <p>En tant qu'Analyste Stratégique et Gestionnaire de Patrimoine Antifragile, je me consacre à l'analyse approfondie de l'environnement économique, de l'actualité géopolitique, de la macroéconomie et des tendances du marché. Je surveille et évalue les cours des marchés financiers, y compris les actions, les crypto-monnaies, l'or et les devises, pour prendre des décisions éclairées.</p>
+            <p>Mon objectif principal est de protéger et de faire fructifier mon patrimoine en appliquant les principes de l'antifragilité. Cette approche me permet non seulement de résister aux chocs et aux crises, mais aussi de tirer parti des incertitudes et des perturbations pour renforcer et optimiser mon portefeuille.</p>
         </section>
         <section>
             <h3>En quoi consiste l'antifragilité financière ?</h3>
@@ -119,28 +65,41 @@
                 <p>Je recommande vivement les services de Christian à toute personne cherchant à renforcer sa position financière dans un monde de plus en plus imprévisible. Son approche antifragile est véritablement révolutionnaire.</p>
                 <p>- Florence D.</p>
             </div>
-
-          <div class="testimonial">
+            <div class="testimonial">
                 <p>Pourquoi l'antifragilité n'a-t-elle pas peur des défis ?
-
-Parce que plus on la secoue, plus elle se renforce !</p>
+                Parce que plus on la secoue, plus elle se renforce !</p>
                 <p>- Brian G.</p>
             </div>
-
         </section>
         <section>
-<section>
-    <h3>Contexte</h3>
-
-    <p>Dans un monde en constante évolution, les défis financiers auxquels nous sommes confrontés sont nombreux et complexes. La mondialisation, la volatilité des marchés, les <a href="blogue.html">changements politiques,</a> et économiques, ainsi que les avancées technologiques, sont autant de facteurs qui influent sur notre vie financière quotidienne.</p>
-    <p>Comprendre le contexte dans lequel nous évoluons est essentiel pour prendre des décisions éclairées en matière de gestion financière. C'est dans cette optique que je vous propose mon expertise en antifragilité financière, une approche innovante qui vise à renforcer votre position financière dans un environnement en constante mutation.</p>
-</section>
-
-
+            <h3>Contexte</h3>
+            <p>Dans un monde en constante évolution, les défis financiers auxquels nous sommes confrontés sont nombreux et complexes. La mondialisation, la volatilité des marchés, les <a href="blogue.html">changements politiques,</a> et économiques, ainsi que les avancées technologiques, sont autant de facteurs qui influent sur notre vie financière quotidienne.</p>
+            <p>Comprendre le contexte dans lequel nous évoluons est essentiel pour prendre des décisions éclairées en matière de gestion financière. C'est dans cette optique que je vous propose mon expertise en antifragilité financière, une approche innovante qui vise à renforcer votre position financière dans un environnement en constante mutation.</p>
+        </section>
+        <section>
             <h3>Performance</h3>
-            <p>Pour consulter la performance de votre  <a href="performance.html">portefeuille sur les 3 dernières années.</a>.</p>
+            <p>Pour consulter la performance de votre <a href="performance.html">portefeuille sur les 3 dernières années.</a>.</p>
         </section>
         <!-- Ajout du lien vers la page des classes d'actifs -->
         <section>
             <h3>Classes d'Actifs</h3>
             <p>Pour découvrir <a href="classe_actifs.html">les recommandations de répartition.</a>.</p>
+        </section>
+    </div>
+<footer>
+    <p>Date : <span id="current-date"></span></p>
+</footer>
+
+<script>
+    // Fonction pour obtenir la date actuelle
+    function getCurrentDate() {
+        const date = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('fr-FR', options);
+    }
+
+    // Mettre à jour la date actuelle dans le document HTML
+    document.getElementById('current-date').textContent = getCurrentDate();
+</script>
+</body>
+</html>

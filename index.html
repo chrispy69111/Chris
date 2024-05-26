@@ -1,124 +1,160 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2XN5QCJB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LT2XN5QCJB');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2XN5QCJB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LT2XN5QCJB');
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christian Descoteaux - Spécialiste en Antifragilité Financière</title>
-	<link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header img {
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        h1, h2, h3, h4 {
+            margin: 20px 0 10px;
+            padding: 0;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .case-study {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .case-study h4 {
+            color: #4CAF50;
+        }
+        .case-study p {
+            color: #666;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <h1>Christian Descoteaux</h1>
-        <h2>Spécialiste en Antifragilité Financière</h2> 
-        <!-- Élément pour afficher le cours du Bitcoin -->
-        <p id="bitcoin-price">Chargement du cours du Bitcoin...</p>
-        <img src="IMG_7268.jpeg" alt="Photo de Christian Descoteaux" width="150">
-    </header>
+<header>
+    <h1>Christian Descoteaux</h1>
+    <h2>Spécialiste en Antifragilité Financière</h2>
+    <p id="bitcoin-price">Chargement du cours du Bitcoin...</p>
+    <img src="IMG_7268.jpeg" alt="Photo de Christian Descoteaux" width="150">
+</header>
 
-    <script>
-        window.onload = function() {
-            // Récupérer le cours du Bitcoin depuis l'API de CoinGecko
-            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
-                .then(response => response.json())
-                .then(data => {
-                    const bitcoinPrice = data.bitcoin.usd;
-                    // Afficher le cours du Bitcoin dans l'élément avec l'ID "bitcoin-price"
-                    document.getElementById('bitcoin-price').innerText = `Prix du Bitcoin : $${bitcoinPrice}`;
-                })
-                .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
-        }
-    </script>
+<script>
+    window.onload = function() {
+        fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+            .then(response => response.json())
+            .then(data => {
+                const bitcoinPrice = data.bitcoin.usd;
+                document.getElementById('bitcoin-price').innerText = `Prix du Bitcoin : $${bitcoinPrice}`;
+            })
+            .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
+    }
+</script>
 
-    <div class="container">
-        <section>
-            <h3>À propos de moi</h3>
-            <p>Bonjour, je suis Christian Descoteaux, spécialisé dans le concept d'antifragilité financière. L'antifragilité va au-delà de la simple résilience ; elle consiste à tirer profit des chocs et des incertitudes pour renforcer et améliorer votre position financière.</p>
-        </section>
-        <section>
-            <h3>Présentation</h3>
-            <p>En tant qu'Analyste Stratégique et Gestionnaire de Patrimoine Antifragile, je me consacre à l'analyse approfondie de l'environnement économique, de l'actualité géopolitique, de la macroéconomie et des tendances du marché. Je surveille et évalue les cours des marchés financiers, y compris les actions, les crypto-monnaies, l'or et les devises, pour prendre des décisions éclairées.</p>
-            <p>Mon objectif principal est de protéger et de faire fructifier mon patrimoine en appliquant les principes de l'antifragilité. Cette approche me permet non seulement de résister aux chocs et aux crises, mais aussi de tirer parti des incertitudes et des perturbations pour renforcer et optimiser mon portefeuille.</p>
-        </section>
-        <section>
-            <h3>En quoi consiste l'antifragilité financière ?</h3>
-            <p>L'antifragilité financière repose sur l'idée que votre portefeuille financier peut non seulement résister aux perturbations économiques et aux chocs du marché, mais aussi en bénéficier. Plutôt que de simplement survivre aux crises, un portefeuille antifragile est capable de prospérer dans des environnements volatils en s'adaptant et en apprenant de l'incertitude.</p>
-            <p>Cela implique souvent la diversification des actifs, la gestion prudente des risques et des stratégies d'investissement flexibles qui permettent de tirer parti des opportunités offertes par les perturbations du marché.</p>
-        </section>
-        <section>
-            <h3>Services</h3>
-            <ul>
-                <li>Gestion de portefeuille antifragile</li>
-                <li>Planification financière résiliente</li>
-                <li>Investissements adaptatifs</li>
-                <li>Stratégies de réduction des risques</li>
-                <li>Optimisation de la performance en période d'incertitude</li>
-            </ul>
-        </section>
-        <section>
-            <h3>Témoignages de clients</h3>
-            <div class="testimonial">
-                <p>Christian m'a aidé à repenser ma stratégie d'investissement en utilisant des principes antifragiles. Grâce à ses conseils, je me sens mieux préparé pour faire face aux défis financiers à venir.</p>
-                <p>- Sophie J.</p>
-            </div>
-            <div class="testimonial">
-                <p>Je recommande vivement les services de Christian à toute personne cherchant à renforcer sa position financière dans un monde de plus en plus imprévisible. Son approche antifragile est véritablement révolutionnaire.</p>
-                <p>- Florence D.</p>
-            </div>
-            <div class="testimonial">
-                <p>Pourquoi l'antifragilité n'a-t-elle pas peur des défis ?
-                Parce que plus on la secoue, plus elle se renforce !</p>
-                <p>- Brian G.</p>
-            </div>
-        </section>
-        <section>
-            <h3>Contexte</h3>
-            <p>Dans un monde en constante évolution, les défis financiers auxquels nous sommes confrontés sont nombreux et complexes. La mondialisation, la volatilité des marchés, les <a href="blogue.html">changements politiques,</a> et économiques, ainsi que les avancées technologiques, sont autant de facteurs qui influent sur notre vie financière quotidienne.</p>
-            <p>Comprendre le contexte dans lequel nous évoluons est essentiel pour prendre des décisions éclairées en matière de gestion financière. C'est dans cette optique que je vous propose mon expertise en antifragilité financière, une approche innovante qui vise à renforcer votre position financière dans un environnement en constante mutation.</p>
-        </section>
-        <section>
-            <h3>Performance</h3>
-            <p>Pour consulter la performance de votre <a href="performance.html">portefeuille sur les 3 dernières années.</a>.</p>
-        </section>
-        <!-- Ajout du lien vers la page des classes d'actifs -->
-        <section>
-            <h3>Classes d'Actifs</h3>
-            <p>Pour découvrir <a href="classe_actifs.html">les recommandations de répartition.</a>.</p>
-        </section>
-        <!-- Section "Pour me rejoindre" ajoutée ici -->
-        <section class="contact-info">
-            <h3>Pour me rejoindre</h3>
-            <p>Vous pouvez me contacter par e-mail à l'adresse : <a href="mailto:descoteauxchristian@gmail.com">descoteauxchristian@gmail.com</a></p>
-            <p>Vous pouvez également suivre mes mises à jour sur X : <a href="https://x.com/ch_descoteaux">Christian </a></p>
-        </section>
-    </div>
+<div class="container">
+    <section>
+        <h3>À propos de moi</h3>
+        <p>Bonjour, je suis Christian Descoteaux, spécialisé dans le concept d'antifragilité financière. L'antifragilité va au-delà de la simple résilience ; elle consiste à tirer profit des chocs et des incertitudes pour renforcer et améliorer votre position financière.</p>
+    </section>
+    <section>
+        <h3>Présentation</h3>
+        <p>En tant qu'Analyste Stratégique et Gestionnaire de Patrimoine Antifragile, je me consacre à l'analyse approfondie de l'environnement économique, de l'actualité géopolitique, de la macroéconomie et des tendances du marché. Je surveille et évalue les cours des marchés financiers, y compris les actions, les crypto-monnaies, l'or et les devises, pour prendre des décisions éclairées.</p>
+        <p>Mon objectif principal est de protéger et de faire fructifier mon patrimoine en appliquant les principes de l'antifragilité. Cette approche me permet non seulement de résister aux chocs et aux crises, mais aussi de tirer parti des incertitudes et des perturbations pour renforcer et optimiser mon portefeuille.</p>
+    </section>
+    <section>
+        <h3>En quoi consiste l'antifragilité financière ?</h3>
+        <p>L'antifragilité financière repose sur l'idée que votre portefeuille financier peut non seulement résister aux perturbations économiques et aux chocs du marché, mais aussi en bénéficier. Plutôt que de simplement survivre aux crises, un portefeuille antifragile est capable de prospérer dans des environnements volatils en s'adaptant et en apprenant de l'incertitude.</p>
+        <p>Cela implique souvent la diversification des actifs, la gestion prudente des risques et des stratégies d'investissement flexibles qui permettent de tirer parti des opportunités offertes par les perturbations du marché.</p>
+    </section>
+    <section>
+        <h3>Études de Cas</h3>
+        <div class="case-study">
+            <h4>Le Haut Potentiel de Bitcoin</h4>
+            <p>Bitcoin, la pionnière des crypto-monnaies, ne cesse de gagner en popularité et en reconnaissance. Créée en 2009 par Satoshi Nakamoto, Bitcoin a évolué bien au-delà d'un simple moyen de transaction pour devenir une véritable réserve de valeur. Découvrez pourquoi Bitcoin est un atout incontournable dans un portefeuille patrimonial.</p>
+            <p><a href="bitcoin.html">Lire plus</a></p>
+        </div>
+        <div class="case-study">
+            <h4>Les avantages de la diversification des actifs</h4>
+            <p>La diversification des actifs est une stratégie clé en gestion de portefeuille. Elle consiste à répartir les investissements sur différentes classes d'actifs pour réduire les risques et maximiser les rendements à long terme. Découvrez comment et pourquoi diversifier votre portefeuille pour protéger et accroître votre patrimoine.</p>
+            <p><a href="diversification.html">Lire plus</a></p>
+        </div>
+    </section>
+    <section>
+        <h3>Pour me rejoindre</h3>
+        <p>Email : <a href="mailto:descoteauxchristian@gmail.com">descoteauxchristian@gmail.com</a></p>
+        <p>Suivez-moi sur X : <a href="https://x.com/ch_descoteaux/status/1794402823842447813" target="_blank">@ch_descoteaux</a></p>
+    </section>
+    <section>
+        <h3>Contexte</h3>
+        <p>Dans un monde en constante évolution, les défis financiers auxquels nous sommes confrontés sont nombreux et complexes. La mondialisation, la volatilité des marchés, les <a href="blogue.html">changements politiques</a>, et économiques, ainsi que les avancées technologiques, sont autant de facteurs qui influent sur notre vie financière quotidienne.</p>
+        <p>Comprendre le contexte dans lequel nous évoluons est essentiel pour prendre des décisions éclairées en matière de gestion financière. C'est dans cette optique que je vous propose mon expertise en antifragilité financière, une approche innovante qui vise à renforcer votre position financière dans un environnement en constante mutation.</p>
+    </section>
+    <section>
+        <h3>Performance</h3>
+        <p>Pour consulter la performance de votre <a href="performance.html">portefeuille sur les 3 dernières années</a>.</p>
+    </section>
+    <section>
+        <h3>Classes d'Actifs</h3>
+        <p>Pour découvrir <a href="classe_actifs.html">les recommandations de répartition</a>.</p>
+    </section>
+</div>
 
 <footer>
     <p>Date : <span id="current-date"></span></p>
-    <p>© 2024 Christian Descoteaux - Tous droits réservés</p>
 </footer>
 
 <script>
-    // Fonction pour obtenir la date actuelle
     function getCurrentDate() {
         const date = new Date();
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         return date.toLocaleDateString('fr-FR', options);
     }
-
-    // Mettre à jour la date actuelle dans le document HTML
     document.getElementById('current-date').textContent = getCurrentDate();
 </script>
+
 </body>
 </html>
-

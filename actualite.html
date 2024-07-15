@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2XN5QCJB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LT2XN5QCJB');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualité - Analyse sur l'attentat contre Donald Trump</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header img {
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        h1, h2, h3, h4 {
+            margin: 20px 0 10px;
+            padding: 0;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .case-study {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .case-study h4 {
+            color: #4CAF50;
+        }
+        .case-study p {
+            color: #666;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Christian Descoteaux</h1>
+    <h2>Analyse sur l'attentat contre Donald Trump</h2>
+</header>
+
+<div class="container">
+    <section>
+        <h3>Contexte et Réaction Immédiate</h3>
+        <p>La tentative d'attentat contre un président en exercice est un événement d'une gravité exceptionnelle, suscitant des réactions immédiates et intenses tant au niveau national qu'international. Dans le cas du président Trump, une telle tentative aurait des répercussions profondes sur plusieurs aspects de la société et de la politique américaine.</p>
+        
+        <h3>Impact Politique</h3>
+        
+        <h4>Ralliement et Polarisation</h4>
+        <p><strong>Ralliement des Partisans :</strong> Une tentative d'attentat pourrait renforcer le soutien de la base de Trump, en galvanisant ses partisans autour de leur leader en danger.</p>
+        <p><strong>Polarisation Accrue :</strong> L'événement pourrait exacerber les divisions politiques déjà profondes aux États-Unis, alimentant la rhétorique violente et la méfiance entre les camps opposés.</p>
+        
+        <h3>Sécurité Nationale</h3>
+        
+        <p><strong>Renforcement des Mesures de Sécurité :</strong> L'incident inciterait à un renforcement immédiat des mesures de sécurité pour les hauts responsables politiques et à une évaluation des failles potentielles dans les protocoles de sécurité.</p>
+        <p><strong>Augmentation des Pouvoirs Exécutifs :</strong> Le gouvernement pourrait justifier une augmentation des pouvoirs exécutifs pour lutter contre le terrorisme intérieur, avec des implications possibles pour les libertés civiles.</p>
+        
+        <h3>Impact Économique</h3>
+        
+        <h4>Volatilité des Marchés</h4>
+        <p><strong>Réaction du Marché Boursier :</strong> Les marchés financiers réagissent souvent de manière volatile à l'instabilité politique. Une tentative d'attentat contre le président pourrait entraîner une chute temporaire des indices boursiers et une augmentation de la volatilité.</p>
+        <p><strong>Investissement Étranger :</strong> L'incident pourrait refroidir les investissements étrangers, en raison de l'incertitude politique accrue et des perceptions négatives de la stabilité du pays.</p>
+        
+        <h4>Dépenses de Sécurité</h4>
+        <p><strong>Augmentation des Dépenses Publiques :</strong> Le gouvernement pourrait augmenter les dépenses pour renforcer la sécurité nationale et protéger les infrastructures critiques, entraînant des répercussions budgétaires.</p>
+    </section>
+</div>
+
+<footer>
+    <p>Date : <span id="current-date"></span></p>
+</footer>
+
+<script>
+    function getCurrentDate() {
+        const date = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('fr-FR', options);
+    }
+    document.getElementById('current-date').textContent = getCurrentDate();
+</script>
+
+</body>
+</html>

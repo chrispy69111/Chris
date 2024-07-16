@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Répartition des Actifs</title>
-    <style>
+ <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -34,11 +34,9 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
+        h1, h2, h3 {
             color: #fff; /* Titre en blanc */
-        }
-        h2 {
-            color: #007bff; /* Sous-titre en bleu */
+            margin-top: 0; /* Ajout de cette ligne pour éviter le décalage vers le bas */
         }
         p {
             line-height: 1.6;
@@ -47,8 +45,55 @@
             text-align: center;
             margin-top: 20px;
             padding-top: 20px;
-            background-color: #4CAF50; /* Fond du pied de page en vert */
+            background-color: #4CAF50;
             color: #fff;
+        }
+        footer p {
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .back-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+        .link-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .link-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>

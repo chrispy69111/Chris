@@ -15,63 +15,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualité - Analyse sur l'attentat contre Donald Trump</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
+  <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background: #f4f4f4;
+            background-color: #f4f4f4;
             color: #333;
         }
         header {
-            background: #4CAF50;
+            background-color: #4CAF50;
             color: #fff;
-            padding: 10px 0;
+            padding: 20px 0;
             text-align: center;
         }
-        header img {
-            border-radius: 50%;
-            margin-top: 10px;
-        }
         .container {
-            width: 80%;
+            max-width: 800px;
             margin: 20px auto;
-            overflow: hidden;
-        }
-        h1, h2, h3, h4 {
-            margin: 20px 0 10px;
-            padding: 0;
-        }
-        p {
-            margin: 10px 0;
-        }
-        .case-study {
-            background: #fff;
             padding: 20px;
-            margin: 20px 0;
+            background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .case-study h4 {
-            color: #4CAF50;
+        h1, h2, h3 {
+            color: #fff; /* Titre en blanc */
+            margin-top: 0; /* Ajout de cette ligne pour éviter le décalage vers le bas */
         }
-        .case-study p {
-            color: #666;
-        }
-        a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
+        p {
+            line-height: 1.6;
         }
         footer {
-            background: #333;
-            color: #fff;
             text-align: center;
-            padding: 10px 0;
             margin-top: 20px;
+            padding-top: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        footer p {
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .back-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+        .link-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .link-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -107,6 +132,8 @@
         <h4>Dépenses de Sécurité</h4>
         <p><strong>Augmentation des Dépenses Publiques :</strong> Le gouvernement pourrait augmenter les dépenses pour renforcer la sécurité nationale et protéger les infrastructures critiques, entraînant des répercussions budgétaires.</p>
     </section>
+ <!-- Bouton de retour à la page principale -->
+    <a href="index.html" class="back-button">Retour à la page principale</a>
 </div>
 
 <footer>

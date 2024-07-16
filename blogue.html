@@ -20,7 +20,6 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
-            line-height: 1.6;
         }
         header {
             background-color: #4CAF50;
@@ -36,12 +35,12 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
+        h1, h2, h3 {
             color: #fff; /* Titre en blanc */
-            margin-bottom: 20px;
+            margin-top: 0; /* Ajout de cette ligne pour éviter le décalage vers le bas */
         }
-        h2 {
-            color: #4CAF50; /* Sous-titres en vert */
+        p {
+            line-height: 1.6;
         }
         footer {
             text-align: center;
@@ -52,6 +51,50 @@
         }
         footer p {
             margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .back-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+        .link-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .link-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -69,6 +112,9 @@
         <p>Cette culture de la dépense excessive crée un environnement propice à la corruption et à l'inefficacité, où les fonds publics sont souvent détournés à des fins personnelles ou politiques plutôt que d'être utilisés pour le bien commun.</p>
         <p>Pour remédier à cette situation, il est impératif que les gouvernements adoptent une approche plus responsable de la gestion des finances publiques.</p>
     </section>
+
+ <!-- Bouton de retour à la page principale -->
+    <a href="index.html" class="back-button">Retour à la page principale</a>
 </div>
 
 <footer>

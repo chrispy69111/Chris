@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2XN5QCJB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LT2XN5QCJB');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objectif Patrimonial - Interactif</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .goal {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            background-color: #ddd;
+            border-radius: 25px;
+            overflow: hidden;
+            height: 30px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .progress {
+            background-color: #4CAF50;
+            height: 100%;
+            border-radius: 25px;
+            width: 0;
+            transition: width 2s ease;
+        }
+        .input-field {
+            padding: 10px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .start-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .start-button:hover {
+            background-color: #45a049;
+        }
+        .details, .yearly-goals {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .details p, .yearly-goals p {
+            font-size: 1.1em;
+            color: #333;
+        }
+        .cagr {
+            font-size: 1.5em;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Objectif Patrimonial Interactif</h1>
+
+    <p>Saisissez le montant de votre objectif patrimonial :</p>
+    <input type="number" id="objectif-patrimonial" class="input-field" placeholder="Ex: 5 000 000 $">
+    
+    <p>Saisissez votre patrimoine actuel :</p>
+    <input type="number" id="current-patrimoine" class="input-field" placeholder="Ex: 1 000 000 $">
+
+    <p>Saisissez le nombre d'années pour atteindre l'objectif :</p>
+    <input type="number" id="nb-annees" class="input-field" placeholder="Ex: 10">
+
+    <p>Voici la progression actuelle :</p>
+    <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+    </div>
+    
+    <button class="start-button" onclick="calculateProgress()">Calculer la progression</button>
+
+    <div class="details">
+        <p id="montant-restant"></p>
+        <p id="temps-restant"></p>
+    </div>
+
+    <div class="yearly-goals">
+        <h3>Montants à atteindre chaque année :</h3>
+        <div id="annual-goals-list"></div>
+    </div>
+
+    <div class="details">
+        <h3>Rendement annuel nécessaire :</h3>
+        <p id="rendement-annuel" class="cagr"></p>
+    </div>
+
+
+ <!-- Bouton de retour à la page principale -->
+    <a href="index.html" class="back-button">Retour</a>
+</div>
+
+
+<script>
+    function calculateProgress() {
+        const objectif = parseFloat(document.getElementById('objectif-patrimonial').value); // Objectif patrimonial à atteindre
+        const currentPatrimoine = parseFloat(document.getElementById('current-patrimoine').value); // Récupérer la valeur du patrimoine actuel
+        const nbAnnees = parseInt(document.getElementById('nb-annees').value); // Nombre d'années pour atteindre l'objectif
+
+        if (!isNaN(objectif) && !isNaN(currentPatrimoine) && !isNaN(nbAnnees) && objectif > 0 && currentPatrimoine > 0 && nbAnnees > 0) {
+            const progressPercentage = (currentPatrimoine / objectif) * 100; // Calculer la progression en pourcentage
+            const progressElement = document.getElementById('progress');
+            const montantRestantElement = document.getElementById('montant-restant');
+            const tempsRestantElement = document.getElementById('temps-restant');
+            const annualGoalsList = document.getElementById('annual-goals-list');
+            const rendementAnnuelElement = document.getElementById('rendement-annuel');
+
+            // Calcul de la barre de progression
+            if (progressPercentage >= 100) {
+                progressElement.style.width = '100%'; // Si la progression dépasse 100%, elle est limitée à 100%
+            } else {
+                progressElement.style.width = progressPercentage + '%'; // Ajuster la barre de progression
+            }
+
+            // Calcul du montant restant
+            const montantRestant = objectif - currentPatrimoine;
+            montantRestantElement.textContent = "Montant restant à atteindre : " + montantRestant.toLocaleString() + " $";
+
+            // Calcul du temps restant
+            tempsRestantElement.textContent = "Temps restant : " + nbAnnees + " ans";
+
+            // Calculer les montants à atteindre chaque année
+            annualGoalsList.innerHTML = '';  // Réinitialiser la liste
+            const amountPerYear = montantRestant / nbAnnees;
+
+            for (let i = 0; i < nbAnnees; i++) {
+                const year = new Date().getFullYear() + i + 1;
+                const yearlyGoal = currentPatrimoine + (amountPerYear * (i + 1));
+                const yearlyGoalFormatted = yearlyGoal.toLocaleString();
+                annualGoalsList.innerHTML += `<p>Année ${year} : ${yearlyGoalFormatted} $</p>`;
+            }
+
+            // Calcul du rendement annuel nécessaire (CAGR)
+            const cagr = Math.pow(objectif / currentPatrimoine, 1 / nbAnnees) - 1;
+            const cagrPercent = (cagr * 100).toFixed(2);  // Convertir en pourcentage avec deux décimales
+            rendementAnnuelElement.textContent = `${cagrPercent}% par an nécessaire pour atteindre l'objectif.`;
+
+        } else {
+            alert("Veuillez saisir des valeurs valides pour toutes les entrées.");
+        }
+    }
+</script>
+
+ 
+
+</body>
+</html>

@@ -11,7 +11,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Performance des Actions</title>
+    <title>Performance des Actions et Actifs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,7 +27,7 @@
             text-align: center;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -80,6 +80,10 @@
         .back-button:hover {
             background-color: #45a049;
         }
+        canvas {
+            max-width: 100%;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -129,8 +133,9 @@
                 <td>14.03%</td>
                 <td>+10%</td>
             </tr>
-		<td>Gold miner ETF (GDX)</td>
-                <td>35.72%%</td>
+            <tr>
+                <td>Gold miner ETF (GDX)</td>
+                <td>35.72%</td>
                 <td>+1.8%</td>
             </tr>
             <tr>
@@ -146,6 +151,10 @@
         </tbody>
     </table>
 
+    <!-- Graphique unique -->
+    <h2>Visualisation des Rendements</h2>
+    <canvas id="chartPerformance"></canvas>
+
     <!-- Bouton de retour à la page principale -->
     <a href="performance.html" class="back-button">Retour</a>
 </div>
@@ -153,6 +162,57 @@
 <footer>
     <p>© 2024 Christian Descoteaux</p>
 </footer>
+
+<!-- Inclusion de la bibliothèque Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Noms des actifs
+    const assets = ['Action Canada (XCG)', 'Action Asiatique (AIA)', 'Actions Monde (ACWI)', 'Chord Energy (CHRD)', 'ARC Resources (ARX)', 'Banque CIBC (CM)', 'Gold miner ETF (GDX)', 'Or', 'Bitcoin'];
+
+    // Rendements cumulés
+    const cumulativeData = [18.5, -1.49, 9.35, -21, 177, 14.03, 35.72, 19.93, 110];
+
+    // Rendements du dernier mois
+    const monthlyData = [0, 0, 2.4, -13.6, 1.55, 10, 1.8, 0, -5];
+
+    // Graphique combiné
+    const ctxPerformance = document.getElementById('chartPerformance').getContext('2d');
+    new Chart(ctxPerformance, {
+        type: 'bar',
+        data: {
+            labels: assets,
+            datasets: [
+                {
+                    label: 'Rendement Cumulé (%)',
+                    data: cumulativeData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rendement du Dernier Mois (%)',
+                    data: monthlyData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            }
+        }
+    });
+</script>
 
 </body>
 </html>

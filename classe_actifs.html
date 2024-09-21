@@ -1,30 +1,16 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2XN5QCJB"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-LT2XN5QCJB');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Répartition des Actifs</title>
+    <title>Répartition des Actifs - Portefeuilles</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
             color: #333;
-        }
-        header {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
         }
         .container {
             max-width: 800px;
@@ -34,65 +20,27 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1, h2, h3 {
-            color: #fff; /* Titre en blanc */
-            margin-top: 0; /* Ajout de cette ligne pour éviter le décalage vers le bas */
+        h1, h2 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        canvas {
+            margin: 20px auto;
+            display: block;
         }
         p {
             line-height: 1.6;
         }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            background-color: #4CAF50;
-            color: #fff;
-        }
-        footer p {
-            margin: 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
         .back-button {
             background-color: #4CAF50;
             color: #fff;
-            border: none;
             padding: 10px 20px;
-            text-align: center;
             text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
             border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
+            display: inline-block;
+            margin-top: 20px;
         }
         .back-button:hover {
-            background-color: #45a049;
-        }
-        .link-button {
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .link-button:hover {
             background-color: #45a049;
         }
     </style>
@@ -104,25 +52,8 @@
 </header>
 
 <div class="container">
-    <h2>Les Actifs</h2>
-
-    <p><strong>Cash : 8%</strong><br>
-    Cette proportion de liquidités est appropriée, offrant une réserve essentielle pour les imprévus et les opportunités d'investissement sans nécessiter la liquidation d'autres actifs.</p>
-
-    <p><strong>Or & Crypto : 10%</strong><br>
-    La majeure partie de cette catégorie est constituée de Bitcoin, considéré comme une réserve de valeur. Cette allocation offre une couverture contre l'inflation et la volatilité des marchés traditionnels. L'or renforce cette position en tant que valeur refuge.</p>
-
-    <p><strong>Immobilier : 47%</strong><br>
-    Le patrimoine immobilier est principalement constitué d'une résidence principale et d'une résidence secondaire. Cela indique une faible génération de revenus passifs puisque les biens ne sont pas locatifs, mais une grande sécurité et une valorisation potentielle du capital à long terme. Néanmoins, cette allocation comporte un risque de liquidité moindre.</p>
-
-    <p><strong>Actions et Fonds : 31%</strong><br>
-    Les investissements en actions et fonds diversifiés montrent une stratégie solide de croissance du capital, profitant des rendements potentiels des marchés boursiers. Cela permet également une diversification sectorielle et géographique, essentielle pour réduire les risques spécifiques tout en capitalisant sur la performance des marchés.</p>
-
-    <p><strong>Obligations : 4%</strong><br>
-    Les obligations apportent une stabilité au portefeuille, offrant une protection contre la volatilité des marchés actions. Elles fournissent un flux de revenus fixe et aident à équilibrer le risque global du portefeuille.</p>
-    
     <h2>Portefeuille Stable</h2>
-    <p>La composition du portefeuille Stable est répartie de manière équilibrée en quatre parts égales :</p>
+    <p>Répartition en parts égales pour le portefeuille Stable :</p>
     <ul>
         <li>25% Cash</li>
         <li>25% Or & Crypto</li>
@@ -130,13 +61,97 @@
         <li>25% Actions et Fonds</li>
     </ul>
 
-    <!-- Bouton de retour à la page principale -->
+    <!-- Graphique circulaire pour le portefeuille Stable -->
+    <canvas id="stablePortfolioChart" width="400" height="400"></canvas>
+
+    <h2>Portefeuille Tactique</h2>
+    <p>Répartition des actifs pour le Portefeuille Tactique :</p>
+    <ul>
+        <li>20% Or & Bitcoin</li>
+        <li>13% Cash</li>
+        <li>34% Actions</li>
+        <li>33% Obligations (Portefeuille Stable)</li>
+    </ul>
+
+    <!-- Graphique circulaire pour le portefeuille Tactique -->
+    <canvas id="tacticalPortfolioChart" width="400" height="400"></canvas>
+
+    <!-- Bouton retour -->
     <a href="index.html" class="back-button">Retour à la page principale</a>
 </div>
 
-<footer>
-    <p>© 2024 Christian Descoteaux</p>
-</footer>
+<!-- Inclusion de la bibliothèque Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Graphique pour le portefeuille Stable
+    const stableCtx = document.getElementById('stablePortfolioChart').getContext('2d');
+    const stablePortfolioChart = new Chart(stableCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Cash', 'Or & Crypto', 'Obligations', 'Actions et Fonds'],
+            datasets: [{
+                label: 'Portefeuille Stable',
+                data: [25, 25, 25, 25], // Répartition 25% chacun
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            }
+        }
+    });
+
+    // Graphique pour le portefeuille Tactique
+    const tacticalCtx = document.getElementById('tacticalPortfolioChart').getContext('2d');
+    const tacticalPortfolioChart = new Chart(tacticalCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Or & Bitcoin', 'Cash', 'Actions', 'Obligations (Portefeuille Stable)'],
+            datasets: [{
+                label: 'Portefeuille Tactique',
+                data: [20, 13, 34, 33], // Répartition du portefeuille Tactique
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            }
+        }
+    });
+</script>
 
 </body>
 </html>

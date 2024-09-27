@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Répartition des Actifs - Portefeuilles</title>
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
             color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
         }
         .container {
             max-width: 800px;
@@ -20,13 +26,12 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1, h2 {
-            color: #4CAF50;
-            text-align: center;
+        h1, h2, h3 {
+            color: #fff; /* Titre en blanc */
+            margin-top: 0; /* Ajout de cette ligne pour éviter le décalage vers le bas */
         }
-        canvas {
-            margin: 20px auto;
-            display: block;
+        p {
+            line-height: 1.6;
         }
         p {
             line-height: 1.6;
@@ -49,6 +54,7 @@
 
 <header>
     <h1>Répartition des Actifs</h1>
+<img src="repartition.webp"  width="150">
 </header>
 
 <div class="container">
@@ -62,7 +68,7 @@
     </ul>
 
     <!-- Graphique circulaire pour le portefeuille Stable -->
-    <canvas id="stablePortfolioChart" width="400" height="400"></canvas>
+    <canvas id="stablePortfolioChart" width="200" height="200"></canvas>
 
     <h2>Portefeuille Tactique</h2>
     <p>Répartition des actifs pour le Portefeuille Tactique :</p>

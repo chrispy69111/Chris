@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head> 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2XN5QCJB"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Tolérance au Risque</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header img {
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        h1, h2, h3, h4 {
+            margin: 20px 0 10px;
+            padding: 0;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .case-study {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .case-study h4 {
+            color: #4CAF50;
+        }
+        .case-study p {
+            color: #666;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button.btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button.btn:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+        .result-img {
+            margin-top: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+            button.btn {
+                width: 100%;
+                padding: 15px 0;
+            }
+            .back-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Évaluez votre tolérance au risque</h1>
+    </header>
+
+    <div class="container">
+        <form id="riskForm">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. Quelle est votre réaction si votre portefeuille perd 10 % en un mois ?</p>
+                <input type="radio" name="q1" value="1"> a) Je panique et vends tout<br>
+                <input type="radio" name="q1" value="2"> b) J'attends pour voir si la situation s'améliore<br>
+                <input type="radio" name="q1" value="3"> c) Je vois cela comme une opportunité d'achat
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. Quelle proportion de votre portefeuille investiriez-vous dans des actions à haut risque ?</p>
+                <input type="radio" name="q2" value="1"> a) 0-10%<br>
+                <input type="radio" name="q2" value="2"> b) 10-30%<br>
+                <input type="radio" name="q2" value="3"> c) 30% et plus
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. Avez-vous déjà investi pendant une période de récession ?</p>
+                <input type="radio" name="q3" value="1"> a) Non<br>
+                <input type="radio" name="q3" value="2"> b) Oui, mais j'étais inquiet<br>
+                <input type="radio" name="q3" value="3"> c) Oui, et j'ai maintenu mes positions
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <p>4. Quelle est votre tolérance aux fluctuations quotidiennes de votre portefeuille ?</p>
+                <input type="radio" name="q4" value="1"> a) Très faible<br>
+                <input type="radio" name="q4" value="2"> b) Moyenne<br>
+                <input type="radio" name="q4" value="3"> c) Haute
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <p>5. Que feriez-vous si un de vos investissements chutait de 20 % en une semaine ?</p>
+                <input type="radio" name="q5" value="1"> a) Je vends immédiatement<br>
+                <input type="radio" name="q5" value="2"> b) Je revois mon plan mais j'attends<br>
+                <input type="radio" name="q5" value="3"> c) J'achète davantage
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <p>6. Préférez-vous une croissance lente et régulière ou des gains rapides mais volatils ?</p>
+                <input type="radio" name="q6" value="1"> a) Croissance lente et stable<br>
+                <input type="radio" name="q6" value="2"> b) Un peu des deux<br>
+                <input type="radio" name="q6" value="3"> c) Gains rapides, même avec des risques
+            </div>
+
+            <button type="button" class="btn" onclick="calculateScore()">Voir mon résultat</button>
+
+        </form>
+
+        <div id="result" class="result"></div>
+        <img id="result-img" class="result-img" src="all.webp" width="440" alt="Votre profil d'investisseur">
+
+        <script>
+            function calculateScore() {
+                var form = document.forms["riskForm"];
+                var score = 0;
+                for (var i = 1; i <= 6; i++) {
+                    var question = form["q" + i];
+                    for (var j = 0; j < question.length; j++) {
+                        if (question[j].checked) {
+                            score += parseInt(question[j].value);
+                        }
+                    }
+                }
+                var resultText = "";
+                var imgSrc = "";
+
+                if (score <= 10) {
+                    resultText = "Faible tolérance au risque (Score: " + score + "). Vous préférez la stabilité et la sécurité.";
+                    imgSrc = "low.webp"; // Remplace par le chemin de l'image de profil à faible risque
+                } else if (score <= 15) {
+                    resultText = "Tolérance moyenne au risque (Score: " + score + "). Vous êtes ouvert à un certain risque, mais avec prudence.";
+                    imgSrc = "medium.webp"; // Remplace par le chemin de l'image de profil à risque modéré
+                } else {
+                    resultText = "Forte tolérance au risque (Score: " + score + "). Vous êtes prêt à prendre des risques élevés pour des gains potentiels.";
+                    imgSrc = "high.webp"; // Remplace par le chemin de l'image de profil à fort risque
+                }
+                document.getElementById("result").innerText = resultText;
+                document.getElementById("result-img").src = imgSrc;
+            }
+        </script>
+
+        <!-- Bouton retour à la page principale -->
+</p>
+        <a href="index.html" class="back-button">Retour </a>
+    </div>
+
+    <footer>
+        <p>Date : <span id="current-date"></span></p>
+        <p>Dernière mise à jour : <span id="update-date">27 septembre 2024</span></p>
+    </footer>
+    <script>
+        function getCurrentDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+        document.getElementById('current-date').textContent = getCurrentDate();
+    </script>
+
+</body>
+</html>
+
+</html>

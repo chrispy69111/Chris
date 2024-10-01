@@ -105,48 +105,53 @@
         <tbody>
             <tr>
                 <td>Action Canada (XCG)</td>
-                <td>18.5%</td>
-                <td>stable</td>
+                <td>20.31%</td>
+                <td>+1.85%</td>
             </tr>
             <tr>
                 <td>Action Asiatique (AIA)</td>
-                <td>-1.49%</td>
-                <td>stable</td>
+                <td>7.27%</td>
+                <td>+7.36%</td>
             </tr>
             <tr>
                 <td>Actions Monde (ACWI)</td>
-                <td>9.35%</td>
-                <td>2.4%</td>
+                <td>10.98%</td>
+                <td>+2.18%</td>
             </tr>
             <tr>
                 <td>Chord Energy (CHRD)</td>
-                <td>-21%</td>
-                <td>-13.6%</td>
+                <td>-30.5%</td>
+                <td>-12.1%</td>
             </tr>
             <tr>
                 <td>ARC Resources (ARX)</td>
-                <td>177%</td>
-                <td>+1.55%</td>
+                <td>162.6%</td>
+                <td>-8.3%</td>
             </tr>
             <tr>
                 <td>Banque CIBC (CM)</td>
-                <td>14.03%</td>
-                <td>+10%</td>
+                <td>13.1%</td>
+                <td>+5.3%</td>
             </tr>
             <tr>
                 <td>Gold miner ETF (GDX)</td>
-                <td>35.72%</td>
-                <td>+1.8%</td>
+                <td>41.3%</td>
+                <td>+3.1%</td>
             </tr>
             <tr>
                 <td>Or</td>
-                <td>+19.93%</td>
-                <td>stable</td>
+                <td>27.6%</td>
+                <td>+6.5%</td>
             </tr>
             <tr>
                 <td>Bitcoin</td>
-                <td>+110%</td>
-                <td>-5%</td>
+                <td>131%</td>
+                <td>+3.3%</td>
+            </tr>
+            <tr>
+                <td>Energy Plus (XLE)</td>
+                <td>3.4%</td>
+                <td>-3.8%</td>
             </tr>
         </tbody>
     </table>
@@ -161,19 +166,24 @@
 
 <footer>
     <p>© 2024 Christian Descoteaux</p>
+<p>Dernière mise à jour : 1 octobre 2024</p>
 </footer>
 
 <!-- Inclusion de la bibliothèque Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Noms des actifs
-    const assets = ['Action Canada (XCG)', 'Action Asiatique (AIA)', 'Actions Monde (ACWI)', 'Chord Energy (CHRD)', 'ARC Resources (ARX)', 'Banque CIBC (CM)', 'Gold miner ETF (GDX)', 'Or', 'Bitcoin'];
+    const assets = [
+        'Action Canada (XCG)', 'Action Asiatique (AIA)', 'Actions Monde (ACWI)', 
+        'Chord Energy (CHRD)', 'ARC Resources (ARX)', 'Banque CIBC (CM)', 
+        'Gold miner ETF (GDX)', 'Or', 'Bitcoin', 'Energy Plus (XLE)'
+    ];
 
     // Rendements cumulés
-    const cumulativeData = [18.5, -1.49, 9.35, -21, 177, 14.03, 35.72, 19.93, 110];
+    const cumulativeData = [20.31, 7.27, 10.98, -30.5, 162.6, 13.1, 41.3, 27.6, 131, 3.4];
 
     // Rendements du dernier mois
-    const monthlyData = [0, 0, 2.4, -13.6, 1.55, 10, 1.8, 0, -5];
+    const monthlyData = [1.85, 7.36, 2.18, -12.1, -8.3, 5.3, 3.1, 6.5, 3.3, -3.8];
 
     // Graphique combiné
     const ctxPerformance = document.getElementById('chartPerformance').getContext('2d');

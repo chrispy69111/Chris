@@ -84,6 +84,16 @@
             max-width: 100%;
             margin: 20px 0;
         }
+        .analysis {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .analysis h3 {
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
@@ -159,6 +169,21 @@
     <!-- Graphique unique -->
     <h2>Visualisation des Rendements</h2>
     <canvas id="chartPerformance"></canvas>
+
+    <!-- Analyse -->
+    <div class="analysis">
+        <h3>Analyse du Portefeuille</h3>
+        <p>La diversification géographique (Canada, Asie, Monde) et sectorielle (énergie, ressources naturelles, crypto, métaux précieux) est une bonne stratégie pour réduire les risques spécifiques à un secteur ou à une région. Toutefois, certaines positions sont plus volatiles que d'autres, ce qui pourrait accroître la volatilité globale du portefeuille.</p>
+
+        <h4>Performance générale</h4>
+        <p><strong>Rendements cumulés</strong> : Le portefeuille présente des rendements cumulés impressionnants pour certains actifs comme ARC Resources (162.6%), Bitcoin (131%), et Gold miner ETF (41.3%). Ces actifs ont connu une très forte performance à long terme, reflétant une bonne sélection d'actifs à haut potentiel de croissance.</p>
+        <p><strong>Performances plus mitigées</strong> : Certaines actions comme Chord Energy (-30.5%) et Energy Plus (3.4%) ont sous-performé, ce qui peut s'expliquer par la volatilité du secteur de l'énergie, notamment en période d'incertitude sur les prix du pétrole et du gaz. Cela ajoute un risque significatif au portefeuille, surtout dans les périodes où le secteur énergétique est défavorisé.</p>
+
+        <h4>Rendements récents</h4>
+        <p>Action Asiatique (AIA) et Banque CIBC (CM) affichent de bons rendements sur le dernier mois (+7.36% et +5.3%), ce qui montre que ces secteurs/régions sont actuellement en phase de reprise ou bénéficient de bonnes perspectives économiques à court terme.</p>
+        <p>Or (+6.5%) et Bitcoin (+3.3%) continuent de bien performer à court terme, probablement en raison de la demande accrue pour les valeurs refuges face à l'incertitude économique mondiale.</p>
+        <p>Chord Energy (-12.1%) et ARC Resources (-8.3%) ont subi une forte correction ce dernier mois, ce qui peut être lié à la volatilité des prix de l’énergie.</p>
+    </div>
 
     <!-- Bouton de retour à la page principale -->
     <a href="performance.html" class="back-button">Retour</a>

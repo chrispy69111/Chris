@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Google tag (gtag.js) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian Descoteaux - Spécialiste en Antifragilité Financière</title>
+
+    <link rel="stylesheet" href="styles.css">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT2XN5QCJB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,116 +14,23 @@
         gtag('js', new Date());
         gtag('config', 'G-LT2XN5QCJB');
     </script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christian Descoteaux - Spécialiste en Antifragilité Financière</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: #4CAF50;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        header img {
-            border-radius: 50%;
-            margin-top: 10px;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            overflow: hidden;
-        }
-        h1, h2, h3, h4 {
-            margin: 20px 0 10px;
-            padding: 0;
-        }
-        p {
-            margin: 10px 0;
-        }
-        .case-study {
-            background: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .case-study h4 {
-            color: #4CAF50;
-        }
-        .case-study p {
-            color: #666;
-        }
-        a {
-            color: blue;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualités</title>
-    <style>
-        #info-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f1f1f1;
-            padding: 10px;
-            text-align: center;
-            font-size: 1.2em;
-            border-bottom: 1px solid #ccc;
-            z-index: 1000;
-        }
-    </style>
 </head>
 <body>
     <div id="info-container">
         <div id="info">Chargement des actualités...</div>
     </div>
 
+<div id="info-container">
+    <div id="info">Chargement des actualités...</div>
+    <button id="toggle-button">Masquer les actualités</button>
+</div>
 
-<header>
-    <h1>Christian Descoteaux</h1>
-    <h2>Spécialiste en Antifragilité Financière</h2>
-    <p id="bitcoin-price">Chargement du cours du Bitcoin...</p>
-    <img src="Image.webp" alt="Photo de Christian Descoteaux" width="150">
-</header>
-
-<script>
-    window.onload = function() {
-        fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
-            .then(response => response.json())
-            .then(data => {
-                const bitcoinPrice = data.bitcoin.usd;
-                document.getElementById('bitcoin-price').innerText = `Prix du Bitcoin : $${bitcoinPrice}`;
-            })
-            .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
-    }
-</script>
+    <header>
+        <h1>Christian Descoteaux</h1>
+        <h2>Spécialiste en Antifragilité Financière</h2>
+        <p id="bitcoin-price">Chargement du cours du Bitcoin...</p>
+        <img src="Image.webp" alt="Photo de Christian Descoteaux" width="150">
+    </header>
 
  
 
@@ -219,9 +131,11 @@
 </script>
 
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
         <p>Suivez-moi sur X :  <a class="twitter-timeline" href="https://twitter.com/@ch_descoteaux?ref_src=twsrc%5Etfw">Tweets by @ch_descoteaux</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </section>
 </div>
+
 
 <footer>
     <p>Date : <span id="current-date"></span></p>
@@ -229,42 +143,11 @@
 
 </footer>
 
-<script>
-    function getCurrentDate() {
-        const date = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('fr-FR', options);
-    }
-    document.getElementById('current-date').textContent = getCurrentDate();
-</script>
+<script src="script.js"></script>
 
-   
 
-    <script>
-       fetch('news.json')
-    .then(response => response.json())
-    .then(data => {
-        const categories = data.actualites;
-        const messages = [];
 
-        // Parcourir chaque catégorie et ajouter les infos aux messages
-        for (const categorie in categories) {
-            categories[categorie].forEach(item => {
-                messages.push(`${categorie} : ${item.titre} - ${item.description} (${item.source})`);
-            });
-        }
 
-        let index = 0;
-        function afficherInfo() {
-            document.getElementById('info').textContent = messages[index];
-            index = (index + 1) % messages.length;
-        }
-
-        setInterval(afficherInfo, 3000); // Change toutes les 3 secondes
-        afficherInfo(); // Appel initial pour afficher immédiatement la première info
-    })
-    .catch(error => console.error('Erreur lors du chargement des informations:', error));
-
-    </script>
 </body>
+
 </html>

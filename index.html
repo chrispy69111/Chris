@@ -76,6 +76,31 @@
 </head>
 <body>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités</title>
+    <style>
+        #info-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            border-bottom: 1px solid #ccc;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="info-container">
+        <div id="info">Chargement des actualités...</div>
+    </div>
+
+
 <header>
     <h1>Christian Descoteaux</h1>
     <h2>Spécialiste en Antifragilité Financière</h2>
@@ -94,6 +119,8 @@
             .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
     }
 </script>
+
+ 
 
 <div class="container">
    
@@ -211,5 +238,21 @@
     document.getElementById('current-date').textContent = getCurrentDate();
 </script>
 
+   
+
+    <script>
+        fetch('actualites_du_jour.json')
+            .then(response => response.json())
+            .then(data => {
+                let index = 0;
+                function afficherInfo() {
+                    document.getElementById('info').textContent = data[index].info;
+                    index = (index + 1) % data.length;
+                }
+                setInterval(afficherInfo, 3000); // Change toutes les 3 secondes
+                afficherInfo(); // Appel initial pour afficher immédiatement la première info
+            })
+            .catch(error => console.error('Erreur lors du chargement des informations:', error));
+    </script>
 </body>
 </html>

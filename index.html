@@ -241,18 +241,30 @@
    
 
     <script>
-        fetch('actualites_du_jour.json')
-            .then(response => response.json())
-            .then(data => {
-                let index = 0;
-                function afficherInfo() {
-                    document.getElementById('info').textContent = data[index].info;
-                    index = (index + 1) % data.length;
-                }
-                setInterval(afficherInfo, 3000); // Change toutes les 3 secondes
-                afficherInfo(); // Appel initial pour afficher immédiatement la première info
-            })
-            .catch(error => console.error('Erreur lors du chargement des informations:', error));
+       fetch('news.json')
+    .then(response => response.json())
+    .then(data => {
+        const categories = data.actualites;
+        const messages = [];
+
+        // Parcourir chaque catégorie et ajouter les infos aux messages
+        for (const categorie in categories) {
+            categories[categorie].forEach(item => {
+                messages.push(`${categorie} : ${item.titre} - ${item.description} (${item.source})`);
+            });
+        }
+
+        let index = 0;
+        function afficherInfo() {
+            document.getElementById('info').textContent = messages[index];
+            index = (index + 1) % messages.length;
+        }
+
+        setInterval(afficherInfo, 3000); // Change toutes les 3 secondes
+        afficherInfo(); // Appel initial pour afficher immédiatement la première info
+    })
+    .catch(error => console.error('Erreur lors du chargement des informations:', error));
+
     </script>
 </body>
 </html>

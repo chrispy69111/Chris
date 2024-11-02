@@ -9,7 +9,10 @@ window.onload = function() {
 };
 
 
+
 let afficher = true; // Variable pour suivre l'état d'affichage
+let index = 0; // Déclare et initialise la variable index
+let messages = []; // Assure-toi que la variable messages est initialisée
 
 // Fonction pour afficher les informations
 function afficherInfo() {

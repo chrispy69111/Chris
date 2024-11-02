@@ -92,4 +92,37 @@ header {
             color: blue;
             text-decoration: none;
         }
+#info-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50; /* Vert attrayant */
+    color: #fff; /* Texte blanc pour le contraste */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    z-index: 1000; /* Assure que le conteneur est au-dessus des autres éléments */
+}
+
+#info {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: defilement 10s linear infinite;
+}
+
+}
+
+.hidden {
+    opacity: 0;
+}
+
+@keyframes defilement {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
     

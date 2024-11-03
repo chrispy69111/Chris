@@ -9,7 +9,6 @@ window.onload = function() {
 };
 
 
-
 let afficher = true; // Variable pour suivre l'état d'affichage
 let index = 0; // Déclare et initialise la variable index
 let messages = []; // Assure-toi que la variable messages est initialisée
@@ -47,12 +46,10 @@ fetch('./news.json')
             });
         }
 
-        let index = 0;
         afficherInfo(); // Appel initial
-        setInterval(afficherInfo, 30000); // Change toutes les 30 secondes
+        setInterval(afficherInfo, 15000); // Change toutes les 15 secondes
     })
     .catch(error => console.error('Erreur lors du chargement des informations:', error));
-
 
 
 

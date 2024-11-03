@@ -8,7 +8,6 @@ window.onload = function() {
         .catch(error => console.error('Erreur lors de la récupération du cours du Bitcoin :', error));
 };
 
-
 let afficher = true; // Variable pour suivre l'état d'affichage
 let index = 0; // Déclare et initialise la variable index
 let messages = []; // Assure-toi que la variable messages est initialisée
@@ -27,7 +26,7 @@ function afficherInfo() {
     }
 }
 
-/// Charger les messages depuis le fichier JSON
+// Charger les messages depuis le fichier JSON
 fetch('./news.json')
     .then(response => response.json())
     .then(data => {
@@ -48,16 +47,15 @@ fetch('./news.json')
 // Bouton pour masquer/afficher
 document.getElementById('toggle-button').addEventListener('click', () => {
     afficher = !afficher; // Inverse l'état d'affichage
+    const infoElement = document.getElementById('info');
     if (afficher) {
         document.getElementById('toggle-button').textContent = "Masquer les actualités";
         afficherInfo(); // Affiche immédiatement si réactivé
     } else {
         document.getElementById('toggle-button').textContent = "Afficher les actualités";
-        document.getElementById('info').textContent = ""; // Efface le contenu
+        infoElement.textContent = ""; // Efface le contenu
     }
 });
-    .catch(error => console.error('Erreur lors du chargement des informations:', error));
-
 
 
 

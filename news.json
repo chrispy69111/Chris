@@ -1,65 +1,58 @@
 {
-  "date": "2024-11-02",
-  "actualites": {
+  "date": "2024-11-03",
+  "nouvelles": {
     "Finance": [
       {
-        "titre": "Les marchés boursiers en hausse après l'annonce des taux d'intérêt",
-        "description": "Les principales bourses mondiales ont clôturé en hausse suite à l'annonce du maintien des taux d'intérêt par la Réserve fédérale.",
-        "source": "La Presse"
+        "titre": "Grève imminente à Postes Canada",
+        "description": "Le Syndicat des travailleurs et travailleuses des postes (STTP) menace de déclencher une grève dès le 3 novembre si aucune entente n'est conclue, ce qui pourrait perturber les services postaux à travers le pays.",
+        "source": "TVA Nouvelles",
+        "lien": "https://www.tvanouvelles.ca/2024/10/28/postes-canada-les-travailleurs-menacent-de-declencher-une-greve-le-3-novembre"
       },
       {
-        "titre": "Le dollar canadien atteint son plus haut niveau en six mois",
-        "description": "La devise canadienne s'est appréciée face au dollar américain, atteignant un sommet inédit depuis avril.",
-        "source": "Radio-Canada"
+        "titre": "Réforme des programmes d'immigration économique",
+        "description": "Le gouvernement du Québec a publié un règlement modifiant le Règlement sur l'immigration au Québec, visant à améliorer les programmes d'immigration économique pour répondre aux enjeux de main-d'œuvre et soutenir le développement économique.",
+        "source": "Gouvernement du Québec",
+        "lien": "https://www.quebec.ca/nouvelles/actualites/details/publication-reglement-modifiant-reglement-immigration-gazette-officielle-51862"
       }
     ],
     "Géopolitique": [
       {
-        "titre": "Tensions accrues entre les États-Unis et la Chine en mer de Chine méridionale",
-        "description": "Des manœuvres militaires ont intensifié les tensions entre Washington et Pékin dans cette zone stratégique.",
-        "source": "Le Devoir"
+        "titre": "Élections américaines 2024",
+        "description": "Les élections présidentielles américaines approchent, avec des enjeux majeurs pour l'avenir du pays et des répercussions internationales.",
+        "source": "Radio-Canada",
+        "lien": "https://ici.radio-canada.ca/info/dossier/1011171/elections-presidentielles-americaines-2024-trump-biden"
       },
       {
-        "titre": "Accord historique signé entre Israël et le Liban sur la frontière maritime",
-        "description": "Les deux pays ont conclu un accord délimitant leurs frontières maritimes, ouvrant la voie à l'exploitation de ressources gazières.",
-        "source": "Le Monde"
+        "titre": "Conflit au Moyen-Orient",
+        "description": "Les tensions continuent de s'intensifier entre divers acteurs régionaux, alimentant l'instabilité géopolitique mondiale.",
+        "source": "Monde Diplomatique",
+        "lien": "https://www.monde-diplomatique.fr/"
       }
     ],
     "Local": [
       {
-        "titre": "Montréal inaugure une nouvelle ligne de tramway",
-        "description": "La ville a officiellement lancé une nouvelle ligne de tramway reliant le centre-ville à l'est de l'île.",
-        "source": "Journal de Montréal"
+        "titre": "Élections scolaires anglophones",
+        "description": "Des élections générales ont lieu au sein des neuf commissions scolaires anglophones du Québec, permettant à plus de 295 000 personnes inscrites de voter pour élire les membres du conseil des commissaires et une présidente ou un président dans chaque commission scolaire.",
+        "source": "Gouvernement du Québec",
+        "lien": "https://www.quebec.ca/nouvelles/actualites/details/elections-dans-les-commissions-scolaires-anglophones-le-3-novembre-2024-58387"
       },
       {
-        "titre": "Le maire de Québec annonce un plan ambitieux pour le logement abordable",
-        "description": "Un investissement de 500 millions de dollars est prévu pour construire 5 000 unités de logement abordable d'ici 2026.",
-        "source": "Le Soleil"
+        "titre": "Gala de l'ADISQ 2024",
+        "description": "La 46e édition du Gala de l'ADISQ se tient à la salle Wilfrid-Pelletier de la Place des Arts, avec Pierre-Yves Roy-Desmarais comme nouvel animateur.",
+        "source": "Radio-Canada",
+        "lien": "https://presse.radio-canada.ca/television/13442/gala-de-l-adisq-2024-devoilement-des-nominations/"
       }
     ],
     "International": [
       {
-        "titre": "La COP30 s'ouvre à Rio avec des objectifs climatiques renforcés",
-        "description": "Les dirigeants mondiaux se réunissent au Brésil pour discuter des mesures visant à limiter le réchauffement climatique.",
-        "source": "Le Monde"
+        "titre": "Corée du Nord",
+        "description": "Des soldats nord-coréens se déclarent prêts à combattre 'dans les jours à venir', augmentant les tensions dans la région.",
+        "source": "Journal de Montréal",
+        "lien": "https://www.journaldemontreal.com/"
       },
       {
-        "titre": "L'OMS déclare la fin de l'épidémie d'Ebola en Afrique de l'Ouest",
-        "description": "Après plusieurs mois de lutte, l'Organisation mondiale de la santé a annoncé la fin de l'épidémie qui a touché plusieurs pays.",
-        "source": "BBC News"
-      }
-    ],
-    "Divers": [
-      {
-        "titre": "Un artiste québécois remporte le prix Turner au Royaume-Uni",
-        "description": "L'artiste visuel de Montréal a été récompensé pour son installation innovante sur le thème de l'identité.",
-        "source": "Radio-Canada"
-      },
-      {
-        "titre": "Découverte d'une nouvelle espèce de dinosaure au Canada",
-        "description": "Des paléontologues ont mis au jour les restes d'un dinosaure inconnu jusqu'alors dans l'Alberta.",
-        "source": "La Presse"
-      }
-    ]
-  }
-}
+        "titre": "Espagne",
+        "description": "Sept personnes sont portées disparues suite à des pluies torrentielles ayant causé des inondations majeures.",
+        "source
+::contentReference[oaicite:6]{index=6}
+ 

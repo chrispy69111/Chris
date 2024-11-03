@@ -37,12 +37,12 @@ document.getElementById('toggle-button').addEventListener('click', () => {
 fetch('./news.json')
     .then(response => response.json())
     .then(data => {
-        const categories = data.actualites;
+        const categories = data.messages;
         messages = [];
 
         for (const categorie in categories) {
             categories[categorie].forEach(item => {
-                messages.push(`${categorie} : ${item.titre} - ${item.description} (${item.source})`);
+                messages.push(`${categorie} : ${item.titre}`);
             });
         }
 

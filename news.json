@@ -1,58 +1,29 @@
 {
-  "date": "2024-11-03",
-  "nouvelles": {
-    "Finance": [
-      {
-        "titre": "Grève imminente à Postes Canada",
-        "description": "Le Syndicat des travailleurs et travailleuses des postes (STTP) menace de déclencher une grève dès le 3 novembre si aucune entente n'est conclue, ce qui pourrait perturber les services postaux à travers le pays.",
-        "source": "TVA Nouvelles",
-        "lien": "https://www.tvanouvelles.ca/2024/10/28/postes-canada-les-travailleurs-menacent-de-declencher-une-greve-le-3-novembre"
-      },
-      {
-        "titre": "Réforme des programmes d'immigration économique",
-        "description": "Le gouvernement du Québec a publié un règlement modifiant le Règlement sur l'immigration au Québec, visant à améliorer les programmes d'immigration économique pour répondre aux enjeux de main-d'œuvre et soutenir le développement économique.",
-        "source": "Gouvernement du Québec",
-        "lien": "https://www.quebec.ca/nouvelles/actualites/details/publication-reglement-modifiant-reglement-immigration-gazette-officielle-51862"
-      }
+  "messages": {
+    "Motivation": [
+      "Travaillez dur, jouez dur, puis appuyez sur 'Snooze'.",
+      "Il n'est jamais trop tard pour être génial. Sauf peut-être à 23h59.",
+      "Rappelez-vous : même les tortues avancent. Lentement mais sûrement."
     ],
-    "Géopolitique": [
-      {
-        "titre": "Élections américaines 2024",
-        "description": "Les élections présidentielles américaines approchent, avec des enjeux majeurs pour l'avenir du pays et des répercussions internationales.",
-        "source": "Radio-Canada",
-        "lien": "https://ici.radio-canada.ca/info/dossier/1011171/elections-presidentielles-americaines-2024-trump-biden"
-      },
-      {
-        "titre": "Conflit au Moyen-Orient",
-        "description": "Les tensions continuent de s'intensifier entre divers acteurs régionaux, alimentant l'instabilité géopolitique mondiale.",
-        "source": "Monde Diplomatique",
-        "lien": "https://www.monde-diplomatique.fr/"
-      }
+    "Humour": [
+      "Souriez, c'est contagieux (mais pas comme en 2020) !",
+      "Le bonheur commence avec un clic… sauf si c’est sur 'Envoyer tout supprimer'.",
+      "Ne stressez pas. Même les ordinateurs plantent."
     ],
-    "Local": [
-      {
-        "titre": "Élections scolaires anglophones",
-        "description": "Des élections générales ont lieu au sein des neuf commissions scolaires anglophones du Québec, permettant à plus de 295 000 personnes inscrites de voter pour élire les membres du conseil des commissaires et une présidente ou un président dans chaque commission scolaire.",
-        "source": "Gouvernement du Québec",
-        "lien": "https://www.quebec.ca/nouvelles/actualites/details/elections-dans-les-commissions-scolaires-anglophones-le-3-novembre-2024-58387"
-      },
-      {
-        "titre": "Gala de l'ADISQ 2024",
-        "description": "La 46e édition du Gala de l'ADISQ se tient à la salle Wilfrid-Pelletier de la Place des Arts, avec Pierre-Yves Roy-Desmarais comme nouvel animateur.",
-        "source": "Radio-Canada",
-        "lien": "https://presse.radio-canada.ca/television/13442/gala-de-l-adisq-2024-devoilement-des-nominations/"
-      }
+    "Bien-être": [
+      "N'oubliez pas de respirer profondément. Pas trop profondément, juste assez.",
+      "La vie est trop courte pour boire du mauvais café.",
+      "Mangez des légumes. Vos parents seraient fiers."
     ],
-    "International": [
-      {
-        "titre": "Corée du Nord",
-        "description": "Des soldats nord-coréens se déclarent prêts à combattre 'dans les jours à venir', augmentant les tensions dans la région.",
-        "source": "Journal de Montréal",
-        "lien": "https://www.journaldemontreal.com/"
-      },
-      {
-        "titre": "Espagne",
-        "description": "Sept personnes sont portées disparues suite à des pluies torrentielles ayant causé des inondations majeures.",
-        "source
-::contentReference[oaicite:6]{index=6}
- 
+    "Pause": [
+      "Besoin d'une pause ? C'est le moment de faire semblant de travailler.",
+      "Qui a besoin d'une pause ? Ouvrez un nouvel onglet, regardez un chat mignon.",
+      "Votre cerveau a-t-il besoin de redémarrer ? Une sieste est recommandée."
+    ],
+    "Inspiration": [
+      "La créativité, c'est l'intelligence qui s'amuse – merci, Einstein !",
+      "Il faut vivre chaque jour comme s'il était samedi… mais sans dormir jusqu'à midi.",
+      "Quand la vie te donne des citrons, fais un jus et ajoute une touche de menthe."
+    ]
+  }
+}

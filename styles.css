@@ -122,6 +122,15 @@ header {
 
 }
 
+#toggle-button {
+    display: inline-block;
+    margin-top: 0;
+    float: right; /* Positionne le bouton à droite */
+    background-color: #f44336; /* Change la couleur du bouton si souhaité */
+    color: #fff;
+}
+
+
 .hidden {
     opacity: 0;
 }

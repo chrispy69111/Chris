@@ -40,7 +40,7 @@ fetch('./news.json')
         }
 
         afficherInfo(); // Affiche le premier message
-        setInterval(afficherInfo, 15000); // Change de message toutes les 15 secondes
+        setInterval(afficherInfo, 20000); // Change de message toutes les 20 secondes
     })
     .catch(error => console.error('Erreur lors du chargement des informations:', error));
 

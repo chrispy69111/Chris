@@ -55,7 +55,7 @@ document.getElementById('toggle-button').addEventListener('click', () => {
         document.getElementById('toggle-button').textContent = "Afficher les actualités";
         infoElement.textContent = ""; // Efface le contenu
     }
-});
+})
 
 
 

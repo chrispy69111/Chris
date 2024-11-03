@@ -13,27 +13,21 @@ let afficher = true; // Variable pour suivre l'état d'affichage
 let index = 0; // Déclare et initialise la variable index
 let messages = []; // Assure-toi que la variable messages est initialisée
 
-// Fonction pour afficher les informations
+// Fonction pour afficher et changer le message
 function afficherInfo() {
     if (afficher && messages.length > 0) {
-        document.getElementById('info').textContent = messages[index];
-        index = (index + 1) % messages.length;
+        const infoElement = document.getElementById('info');
+        infoElement.style.animation = 'none'; // Réinitialise l'animation pour redémarrer
+
+        setTimeout(() => {
+            infoElement.textContent = messages[index]; // Change le texte
+            infoElement.style.animation = ''; // Relance l'animation
+            index = (index + 1) % messages.length; // Passe au message suivant en boucle
+        }, 100); // Petit délai pour éviter les effets de transition indésirables
     }
 }
 
-// Gestion du bouton pour masquer/afficher les actualités
-document.getElementById('toggle-button').addEventListener('click', () => {
-    afficher = !afficher; // Inverse l'état d'affichage
-    if (afficher) {
-        document.getElementById('toggle-button').textContent = "Masquer les actualités";
-        afficherInfo(); // Affiche immédiatement si réactivé
-    } else {
-        document.getElementById('toggle-button').textContent = "Afficher les actualités";
-        document.getElementById('info').textContent = ""; // Efface le contenu
-    }
-});
-
-// Charge les informations et configure l'intervalle
+/// Charger les messages depuis le fichier JSON
 fetch('./news.json')
     .then(response => response.json())
     .then(data => {
@@ -46,9 +40,22 @@ fetch('./news.json')
             });
         }
 
-        afficherInfo(); // Appel initial
-        setInterval(afficherInfo, 15000); // Change toutes les 15 secondes
+        afficherInfo(); // Affiche le premier message
+        setInterval(afficherInfo, 15000); // Change de message toutes les 15 secondes
     })
+    .catch(error => console.error('Erreur lors du chargement des informations:', error));
+
+// Bouton pour masquer/afficher
+document.getElementById('toggle-button').addEventListener('click', () => {
+    afficher = !afficher; // Inverse l'état d'affichage
+    if (afficher) {
+        document.getElementById('toggle-button').textContent = "Masquer les actualités";
+        afficherInfo(); // Affiche immédiatement si réactivé
+    } else {
+        document.getElementById('toggle-button').textContent = "Afficher les actualités";
+        document.getElementById('info').textContent = ""; // Efface le contenu
+    }
+});
     .catch(error => console.error('Erreur lors du chargement des informations:', error));
 
 

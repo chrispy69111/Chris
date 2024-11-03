@@ -42,7 +42,7 @@ fetch('./news.json')
 
         for (const categorie in categories) {
             categories[categorie].forEach(item => {
-                messages.push(`${categorie} : ${item.titre}`);
+                messages.push(`${categorie} : ${item}`);
             });
         }
 

@@ -29,7 +29,7 @@ header {
         }
         h1, h2, h3 {
             color: #fff; /* Titre en blanc */
-            margin-top: 0; /* Ajout de cette ligne pour éviter le décalage vers le bas */
+            margin-top: 60px; /* Ajout de cette ligne pour éviter le décalage vers le bas */
         }
         p {
             line-height: 1.6;
@@ -97,7 +97,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #4CAF50; /* Vert attrayant */
+    background-colour: #4CAF50; /* Vert attrayant */
     color: #fff; /* Texte blanc pour le contraste */
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    padding: 10px;

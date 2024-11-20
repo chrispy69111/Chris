@@ -25,24 +25,19 @@ function afficherInfo() {
         }, 100); // Petit délai pour éviter les effets de transition indésirables
     }
 }
-
-// Charger les messages depuis le fichier JSON
-fetch('./news.json')
+// Charger et afficher les nouvelles
+fetch('news.json')
     .then(response => response.json())
     .then(data => {
-        const categories = data.messages;
-        messages = [];
-
-        for (const categorie in categories) {
-            categories[categorie].forEach(item => {
-                messages.push(`${categorie} : ${item}`);
-            });
-        }
-
-        afficherInfo(); // Affiche le premier message
-        setInterval(afficherInfo, 20000); // Change de message toutes les 20 secondes
+        const newsContainer = document.getElementById('news-ticker');
+        let newsHtml = '';
+        data.newsItems.forEach(item => {
+            newsHtml += `<span>${item.title} - ${item.description}</span>`;
+        });
+        newsContainer.innerHTML = newsHtml;
     })
-    .catch(error => console.error('Erreur lors du chargement des informations:', error));
+    .catch(error => console.error('Erreur lors du chargement des nouvelles :', error));
+
 
 // Bouton pour masquer/afficher
 document.getElementById('toggle-button').addEventListener('click', () => {

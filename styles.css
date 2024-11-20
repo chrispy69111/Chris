@@ -151,14 +151,7 @@ header {
 
 #news-ticker {
     display: inline-block;
-    animation: scroll 45s linear infinite; /* Augmentez la durée ici */
+    animation: scroll 200s linear infinite; /* Augmentez la durée ici */
 }
 
-@keyframes scroll {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
+

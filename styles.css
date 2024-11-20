@@ -133,9 +133,13 @@ header {
     opacity: 0;
 }
 
-@keyframes defilement {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+@keyframes scroll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
     #news-ticker-container {
     overflow: hidden;
@@ -147,7 +151,7 @@ header {
 
 #news-ticker {
     display: inline-block;
-    animation: scroll 15s linear infinite;
+    animation: scroll 45s linear infinite; /* Augmentez la durée ici */
 }
 
 @keyframes scroll {

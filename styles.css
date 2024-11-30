@@ -27,10 +27,7 @@ header {
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1, h2, h3 {
-            color: #fff; /* Titre en blanc */
-            margin-top: 30px; /* Ajout de cette ligne pour éviter le décalage vers le bas */
-        }
+  
         p {
             line-height: 1.5;
         }
@@ -151,7 +148,14 @@ header {
 
 #news-ticker {
     display: inline-block;
-    animation: scroll 200s linear infinite; /* Augmentez la durée ici */
+    animation: scroll 45s linear infinite; /* Augmentez la durée ici */
 }
 
-
+@keyframes scroll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}

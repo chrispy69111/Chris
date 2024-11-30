@@ -109,71 +109,84 @@
             <tr>
                 <th>Nom de l'Actif</th>
                 <th>Rendement Cumulé</th>
-                <th>Rendement du Dernier Mois</th>
+                <th>Rendement du mois novembre</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>Action Asiatique (AIA)</td>
-                <td>2.61%</td>
-                <td>-1.1%</td>
+                <td>0%</td>
+                <td>-4%</td>
             </tr>
             <tr>
                 <td>Actions Monde (ACWI)</td>
-                <td>18.9%</td>
-                <td>-2.0%</td>
+                <td>24%</td>
+                <td>4%</td>
             </tr>
             <tr>
                 <td>Chord Energy (CHRD)</td>
-                <td>-31.0%</td>
-                <td>-4.0%</td>
+                <td>-29%</td>
+                <td>2%</td>
             </tr>
             <tr>
                 <td>ARC Resources (ARX)</td>
-                <td>156.0%</td>
-                <td>1.0%</td>
+                <td>187%</td>
+                <td>11%</td>
             </tr>
             <tr>
                 <td>Banque CIBC (CM)</td>
-                <td>3.5%</td>
-                <td>5.0%</td>
+                <td>.25%</td>
+                <td>4%</td>
             </tr>
             <tr>
                 <td>Gold miner ETF (GDX)</td>
-                <td>4.8%</td>
-                <td>1.0%</td>
+                <td>-1.5%</td>
+                <td>-7.6%</td>
             </tr>
             <tr>
                 <td>Or</td>
-                <td>35.6%</td>
-                <td>3.0%</td>
+                <td>31.5%</td>
+                <td>-4.6%</td>
             </tr>
             <tr>
                 <td>Bitcoin</td>
-                <td>166.0%</td>
-                <td>14.0%</td>
+                <td>276%</td>
+                <td>34%</td>
             </tr>
             <tr>
                 <td>Energy Plus (XLE)</td>
-                <td>5.39%</td>
-                <td>1.0%</td>
+                <td>14%</td>
+                <td>6.5%</td>
+            </tr>
+ 	     <tr>
+                <td>Actions Canada (XCG)</td>
+                <td>33.5%</td>
+                <td>11%</td>
             </tr>
 </tbody>
     </table>
 
-    <!-- Graphique unique -->
-    <h2>Visualisation des Rendements</h2>
-    <canvas id="chartPerformance"></canvas>
-
     <!-- Analyse -->
     
 <div class="analysis">
-    <h3>Analyse du Portefeuille</h3>
-    <p>La performance générale du portefeuille montre une grande variabilité, avec des actifs tels que Bitcoin (+166.0%) et l'Or (+35.6%) qui continuent d'afficher des gains solides grâce à leur rôle de valeurs refuges. Le rendement impressionnant de Bitcoin ce mois-ci (+14.0%) confirme sa popularité croissante face aux incertitudes économiques.</p>
+<h3>Analyse de Novembre - Portefeuille Croissance</h3>
+<p>
+    Le portefeuille a progressé significativement en novembre, porté par des performances remarquables :
+</p>
+<ul>
+    <li><strong>Bitcoin (+34 %)</strong> : Principal moteur, avec un rendement cumulé atteignant <strong>276 %</strong>.</li>
+    <li><strong>ARC Resources (+11 %)</strong> et <strong>Actions Canada (XCG, +11 %)</strong> : Solides contributions, renforçant la dynamique du portefeuille.</li>
+    <li><strong>Actions Monde (ACWI, +4 %)</strong> et <strong>Energy Plus (XLE, +6.5 %)</strong> : Diversification efficace.</li>
+</ul>
+<h4>Points faibles :</h4>
+<ul>
+    <li><strong>Or (-4.6 %)</strong> et <strong>GDX (-7.6 %)</strong> : Repli marqué des métaux précieux.</li>
+    <li><strong>Actions Asiatiques (AIA, -4 %)</strong> et <strong>Chord Energy (+2 %)</strong> : Sous-performances limitant les gains.</li>
+</ul>
+<p>
+    <strong>Conclusion :</strong> Une forte progression grâce aux actifs énergétiques et Bitcoin, malgré des faiblesses sur les métaux précieux. Le portefeuille reste bien positionné dans un contexte volatil.
+</p>
 
-    <h4>Performance mensuelle</h4>
-    <p>Pour octobre, certains actifs comme ARC Resources (+1.0%) et Banque CIBC (+5.0%) ont montré des signes de reprise, tandis que d'autres, comme Chord Energy (-4.0%) et ACWI (-2.0%), ont subi des baisses notables, reflétant des défis persistants dans le secteur de l'énergie et des marchés mondiaux.</p>
-    <p>La stabilité de l'Or (+3.0%) et la progression remarquable de Bitcoin (+14.0%) soulignent l'importance de maintenir une exposition aux actifs alternatifs pour diversifier et protéger le portefeuille.</p>
 </div>
 
 
@@ -183,63 +196,9 @@
 
 <footer>
     <p>© 2024 Christian Descoteaux</p>
-<p>Dernière mise à jour : 1 novembre 2024</p>
+<p>Dernière mise à jour : 1 Octobre 2024</p>
 </footer>
 
-<!-- Inclusion de la bibliothèque Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Noms des actifs
-    const assets = [
-        'Action Canada (XCG)', 'Action Asiatique (AIA)', 'Actions Monde (ACWI)', 
-        'Chord Energy (CHRD)', 'ARC Resources (ARX)', 'Banque CIBC (CM)', 
-        'Gold miner ETF (GDX)', 'Or', 'Bitcoin', 'Energy Plus (XLE)'
-    ];
-
-    // Rendements cumulés
-    const cumulativeData = [20.31, 7.27, 10.98, -30.5, 162.6, 13.1, 41.3, 27.6, 131, 3.4];
-
-    // Rendements du dernier mois
-    const monthlyData = [1.85, 7.36, 2.18, -12.1, -8.3, 5.3, 3.1, 6.5, 3.3, -3.8];
-
-    // Graphique combiné
-    const ctxPerformance = document.getElementById('chartPerformance').getContext('2d');
-    new Chart(ctxPerformance, {
-        type: 'bar',
-        data: {
-            labels: assets,
-            datasets: [
-                {
-                    label: 'Rendement Cumulé (%)',
-                    data: cumulativeData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Rendement du Dernier Mois (%)',
-                    data: monthlyData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'top'
-                }
-            }
-        }
-    });
-</script>
 
 </body>
 </html>

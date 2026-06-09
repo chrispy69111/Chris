@@ -1,8 +1,21 @@
 import { useState } from "react";
 
 import { CONFIDENCE_META } from "../../data/metaboPhases.js";
-import { nowLocal } from "../../lib/metaboState.js";
+import { formatDuration, nowLocal } from "../../lib/metaboState.js";
 import { S } from "./styles.js";
+
+function formatHistoryDate(timestamp) {
+  return new Date(timestamp).toLocaleString("fr-CA", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+}
+
+function formatHistoryDuration(seconds) {
+  const { h, m } = formatDuration(seconds);
+  if (h > 0) return `${h} h ${String(m).padStart(2, "0")}`;
+  return `${m} min`;
+}
 
 export default function HomeScreen({
   startTime,
@@ -10,6 +23,7 @@ export default function HomeScreen({
   m,
   s,
   phase,
+  coach,
   hoursElapsed,
   progressPct,
   showPicker,
@@ -19,6 +33,8 @@ export default function HomeScreen({
   startNow,
   startCustom,
   reset,
+  fastHistory,
+  clearHistory,
 }) {
   const [tab, setTab] = useState("science");
   const conf = phase ? CONFIDENCE_META[phase.confidence] : null;
@@ -39,6 +55,51 @@ export default function HomeScreen({
           <div style={S.chronoIdle}>— h —</div>
         )}
       </div>
+
+      {coach && (
+        <div style={S.coachCard}>
+          <div style={S.coachHeader}>
+            <div>
+              <p style={S.coachEyebrow}>Coach prudent</p>
+              <h3 style={S.coachTitle}>{coach.headline}</h3>
+            </div>
+            <span
+              style={{
+                ...S.badge,
+                ...(coach.proof.tone === 'high'
+                  ? S.coachProofHigh
+                  : coach.proof.tone === 'medium'
+                    ? S.coachProofMedium
+                    : S.coachProofLow),
+              }}
+            >
+              {coach.proof.label}
+            </span>
+          </div>
+
+          <p style={S.coachSummary}>{coach.summary}</p>
+
+          <div style={S.coachList}>
+            {coach.actions.map((action) => (
+              <div key={action.title} style={S.coachItem}>
+                <div style={S.coachItemTitle}>{action.title}</div>
+                <div style={S.coachItemText}>{action.text}</div>
+              </div>
+            ))}
+          </div>
+
+          {coach.safety.length > 0 && (
+            <div style={S.coachSafetyBox}>
+              <div style={S.coachSafetyTitle}>Signaux de prudence</div>
+              <ul style={S.coachSafetyList}>
+                {coach.safety.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
 
       {phase ? (
         <div style={S.phaseCard}>
@@ -149,7 +210,32 @@ export default function HomeScreen({
           )}
         </div>
       ) : (
-        <button style={S.btnGhost} onClick={reset}>Réinitialiser</button>
+        <button style={S.btnGhost} onClick={reset}>Terminer et enregistrer</button>
+      )}
+
+      {fastHistory.length > 0 && (
+        <div style={S.historyCard}>
+          <div style={S.historyHeader}>
+            <div>
+              <p style={S.historyEyebrow}>Historique local</p>
+              <h3 style={S.historyTitle}>Derniers jeûnes</h3>
+            </div>
+            <button style={S.historyClearBtn} onClick={clearHistory}>Vider</button>
+          </div>
+
+          <div style={S.historyList}>
+            {fastHistory.map((entry) => (
+              <div key={entry.id} style={S.historyItem}>
+                <div>
+                  <div style={S.historyDuration}>{formatHistoryDuration(entry.durationSeconds)}</div>
+                  <div style={S.historyMeta}>
+                    {formatHistoryDate(entry.startTime)} → {formatHistoryDate(entry.endTime)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

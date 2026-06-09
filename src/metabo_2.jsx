@@ -4,18 +4,24 @@ import HomeScreen from "./components/metabo/HomeScreen.jsx";
 import LearnScreen from "./components/metabo/LearnScreen.jsx";
 import { S } from "./components/metabo/styles.js";
 import TimelineScreen from "./components/metabo/TimelineScreen.jsx";
+import { buildFastingCoach } from "./lib/fastingCoach.js";
 import {
+  appendFastHistory,
+  buildCompletedFast,
   calculateElapsedSeconds,
   formatDuration,
   getPhase,
   nowLocal,
+  readStoredFastHistory,
   readStoredStartTime,
+  syncStoredFastHistory,
   syncStoredStartTime,
 } from "./lib/metaboState.js";
 
 export default function Metabo() {
   const [screen, setScreen] = useState("home");
   const [startTime, setStartTime] = useState(() => readStoredStartTime());
+  const [fastHistory, setFastHistory] = useState(() => readStoredFastHistory());
   const [elapsed, setElapsed] = useState(() => {
     const storedStartTime = readStoredStartTime();
     return calculateElapsedSeconds(storedStartTime);
@@ -37,8 +43,13 @@ export default function Metabo() {
     syncStoredStartTime(startTime);
   }, [startTime]);
 
+  useEffect(() => {
+    syncStoredFastHistory(fastHistory);
+  }, [fastHistory]);
+
   const hoursElapsed = elapsed / 3600;
   const phase = startTime ? getPhase(hoursElapsed) : null;
+  const coach = startTime ? buildFastingCoach(hoursElapsed) : null;
   const { h, m, s } = formatDuration(elapsed);
 
   function startNow() {
@@ -58,10 +69,21 @@ export default function Metabo() {
   }
 
   function reset() {
+    if (startTime) {
+      const completedFast = buildCompletedFast(startTime, Date.now());
+      if (completedFast) {
+        setFastHistory(current => appendFastHistory(current, completedFast));
+      }
+    }
+
     setStartTime(null);
     setElapsed(0);
     setCustomTime("");
     setShowPicker(false);
+  }
+
+  function clearHistory() {
+    setFastHistory([]);
   }
 
   const progressPct = phase
@@ -82,7 +104,10 @@ export default function Metabo() {
       <div style={S.body}>
         {screen === "home" && (
           <HomeScreen
+            clearHistory={clearHistory}
+            coach={coach}
             customTime={customTime}
+            fastHistory={fastHistory}
             h={h}
             hoursElapsed={hoursElapsed}
             m={m}

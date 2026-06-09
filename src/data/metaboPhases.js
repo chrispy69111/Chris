@@ -24,9 +24,9 @@ export const PHASES = [
       { icon: "🔋", text: "Énergie disponible mais variable selon la composition du repas" },
     ],
     tips: [
-      { icon: "🚶", title: "Marche de 10–15 min", text: "Après un repas, une courte marche réduit le pic glycémique de 20–30 % selon des études cliniques. C'est l'un des gestes les plus efficaces." },
-      { icon: "💧", title: "Hydratez-vous entre les repas", text: "Boire beaucoup pendant le repas dilue les sucs gastriques. Préférez l'eau 30 min avant ou après." },
-      { icon: "⏳", title: "La satiété a un délai", text: "Le signal de satiété met 15–20 min à atteindre le cerveau. Mangez lentement, attendez avant de resservir." },
+      { icon: "🚶", title: "Marche courte", text: "Après un repas, une courte marche peut aider la glycémie postprandiale. Inutile d'en faire beaucoup : quelques minutes suffisent souvent." },
+      { icon: "💧", title: "Hydratation simple", text: "Buvez de l'eau régulièrement selon votre soif et votre contexte. Pas besoin de règles compliquées à ce stade." },
+      { icon: "⏳", title: "Mangez lentement", text: "Si vous êtes encore en train de manger, ralentir aide souvent à mieux percevoir la satiété avant de reprendre une portion." },
     ],
   },
   {
@@ -54,9 +54,9 @@ export const PHASES = [
       { icon: "🤔", text: "Légère faim possible selon la taille du repas précédent — souvent psychologique" },
     ],
     tips: [
-      { icon: "💧", title: "Eau en premier", text: "Si vous ressentez une légère faim, commencez par 300 ml d'eau. La déshydratation active les mêmes signaux que la faim dans le cerveau." },
-      { icon: "☕", title: "Café ou thé noir", text: "Bon moment pour un café ou thé sans sucre ni lait — ne relance pas l'insuline et amplifie légèrement la lipolyse." },
-      { icon: "🏃", title: "Entraînement idéal", text: "Insuline basse + énergie disponible = fenêtre idéale pour un entraînement modéré à intense." },
+      { icon: "💧", title: "Eau en premier", text: "Si une légère faim apparaît, commencez par boire de l'eau et attendez quelques minutes avant d'interpréter le signal." },
+      { icon: "☕", title: "Boissons simples", text: "Eau, café noir ou thé non sucré restent les options les plus classiques si vous les tolérez bien." },
+      { icon: "🏃", title: "Effort mesuré", text: "Si vous vous sentez bien, un effort léger à modéré peut convenir. Évitez l'intense si l'énergie baisse ou si vous débutez avec le jeûne." },
     ],
   },
   {
@@ -84,9 +84,9 @@ export const PHASES = [
       { icon: "😤", text: "Faim variable selon l'habitude alimentaire et le niveau de flexibilité métabolique" },
     ],
     tips: [
-      { icon: "💧", title: "500 ml d'eau", text: "Visez 500 ml d'eau dans cette tranche. L'hydratation maintient l'énergie et réduit les faux signaux de faim." },
-      { icon: "🧂", title: "Électrolytes si sport", text: "Si vous transpirez, ajoutez une pincée de sel de mer à votre eau. Sodium et potassium sont essentiels à la contraction musculaire." },
-      { icon: "📵", title: "Attendre 20 min", text: "La faim à ce stade est souvent une habitude, pas un besoin réel. Éloignez-vous de la cuisine 20 min — elle passe généralement seule." },
+      { icon: "💧", title: "Hydratation régulière", text: "À ce stade, l'eau reste le premier geste utile. Une partie de la faim perçue peut aussi refléter un simple besoin de boire." },
+      { icon: "🧂", title: "Attention au contexte", text: "Si vous transpirez beaucoup ou faites du sport, l'hydratation et les électrolytes méritent plus d'attention — sans improviser des protocoles complexes." },
+      { icon: "📵", title: "Laissez passer la vague", text: "Si la faim monte, attendez un peu, bougez légèrement ou changez d'activité avant de conclure qu'il faut manger." },
     ],
   },
   {
@@ -115,9 +115,9 @@ export const PHASES = [
       { icon: "💪", text: "Les habitués rapportent souvent un sentiment de légèreté et de contrôle" },
     ],
     tips: [
-      { icon: "🌊", title: "Surfez la vague de faim", text: "La faim est une vague, pas un mur. Attendez 20 min, buvez 300 ml d'eau, occupez votre esprit. Elle passe presque toujours." },
-      { icon: "🫖", title: "Bouillon minéral", text: "Un bouillon de légumes chaud (sans calories significatives) apaise la faim et apporte sodium, potassium, magnésium — essentiels à ce stade." },
-      { icon: "💧", title: "Eau minérale", text: "Préférez une eau minérale (Évian, Vichy) — les minéraux compensent les pertes urinaires qui augmentent pendant le jeûne." },
+      { icon: "🌊", title: "Laissez passer la vague", text: "La faim fonctionne souvent par vagues. Eau, pause et changement d'activité sont des réponses plus utiles que la lutte mentale." },
+      { icon: "🚶", title: "Bouger plus léger", text: "Si vous bougez, privilégiez marche, mobilité ou effort modéré selon votre forme. Ce n'est pas le meilleur moment pour forcer une grosse séance." },
+      { icon: "💧", title: "Hydratation prioritaire", text: "Restez attentif à l'eau, surtout si vous êtes actif ou s'il fait chaud. Si un malaise apparaît, la prudence passe avant le plan." },
     ],
   },
   {
@@ -147,10 +147,10 @@ export const PHASES = [
       { icon: "🌀", text: "Légère fatigue les premières fois — le corps s'adapte à un nouveau carburant" },
     ],
     tips: [
-      { icon: "💧", title: "Hydratation critique", text: "Minimum 250 ml/heure si actif. La lipolyse libère de l'eau métabolique, mais les reins en excrètent davantage." },
-      { icon: "🧂", title: "Sel + potassium", text: "¼ c. à thé de sel dans l'eau + pincée de crème de tartre (potassium). Prévient les crampes et la fatigue — protocole validé cliniquement." },
-      { icon: "☕", title: "Café noir", text: "Le café amplifie la lipolyse et réduit la faim. Restez sous 2 tasses pour ne pas trop stimuler le cortisol." },
-      { icon: "🛌", title: "Comptez le sommeil", text: "Beaucoup de ce jeûne se fait la nuit. Un mauvais sommeil augmente la ghréline (hormone de la faim) et sabote les bénéfices." },
+      { icon: "💧", title: "Hydratation prioritaire", text: "Continuez de boire régulièrement. Plus le jeûne avance, plus l'hydratation et l'état général deviennent importants." },
+      { icon: "🚶", title: "Effort plus prudent", text: "Si vous bougez encore bien, gardez l'effort léger à modéré. Évitez l'intense si vous ne vous sentez pas clairement solide." },
+      { icon: "☕", title: "Café si bien toléré", text: "Le café ou le thé peuvent convenir chez certaines personnes, mais ils ne sont pas obligatoires et ne remplacent pas l'eau." },
+      { icon: "🛌", title: "Sommeil et récupération", text: "Si le sommeil est mauvais ou l'énergie instable, voyez cela comme un signal de prudence plutôt qu'un manque de discipline." },
     ],
   },
   {
@@ -180,10 +180,10 @@ export const PHASES = [
       { icon: "🌊", text: "Faim très faible — les cétones ont un effet coupe-faim documenté" },
     ],
     tips: [
-      { icon: "💧", title: "2–3L minimum", text: "Visez 2 à 3 litres d'eau par jour. Les cétones sont acides — les reins travaillent davantage pour maintenir le pH sanguin." },
-      { icon: "🧂", title: "Protocole électrolytes complet", text: "Sodium (sel), potassium (crème de tartre ou eau de coco non sucrée), magnésium (supplément glycinate). Non-négociable à ce stade." },
-      { icon: "🛌", title: "Repos prioritaire", text: "Marche légère acceptable. Évitez l'effort intense — votre corps fait un travail de fond important." },
-      { icon: "⚠️", title: "Signaux d'alarme", text: "Vertiges persistants, confusion, palpitations : rompez le jeûne immédiatement. Ces signaux ne doivent pas être ignorés." },
+      { icon: "💧", title: "Hydratation d'abord", text: "Au-delà de 24 h, l'eau et l'observation de votre état deviennent prioritaires. Évitez les règles trop agressives ou trop précises sans contexte." },
+      { icon: "🛌", title: "Repos prioritaire", text: "Marche légère possible si vous êtes bien, mais le repos et la réduction de l'intensité sont des choix plus prudents." },
+      { icon: "⚠️", title: "Signaux d'alarme", text: "Vertiges persistants, confusion, palpitations ou malaise : rompez le jeûne et privilégiez la sécurité." },
+      { icon: "🏥", title: "Contexte médical", text: "Si vous avez du diabète, une médication, une grossesse ou une condition chronique, cette zone mérite une prudence accrue et souvent un avis professionnel." },
     ],
   },
   {
@@ -212,10 +212,10 @@ export const PHASES = [
       { icon: "🧠", text: "Certains rapportent acuité mentale, d'autres une confusion légère" },
     ],
     tips: [
-      { icon: "🏥", title: "Supervision médicale", text: "Consultation médicale préalable fortement recommandée, surtout avec conditions existantes (diabète, tension, médications)." },
-      { icon: "💧", title: "3L+ avec électrolytes", text: "Sodium, potassium, magnésium. Pas optionnel. La carence en électrolytes est la principale cause de complications." },
-      { icon: "🔁", title: "Reprise progressive obligatoire", text: "Rompez avec un bouillon, puis fruits/légumes cuits. Jamais un repas copieux — risque de syndrome de renutrition." },
-      { icon: "📋", title: "Journalisez toutes les heures", text: "Notez énergie, humeur, faim. Si vertiges, confusion ou palpitations : rompez immédiatement sans hésiter." },
+      { icon: "🏥", title: "Supervision médicale", text: "À ce stade, l'auto-expérimentation devient plus risquée. Une supervision médicale ou professionnelle est la position prudente." },
+      { icon: "💧", title: "Hydratation et prudence", text: "Restez attentif à l'eau et à votre état général. Si quelque chose semble anormal, la sécurité prime sur la poursuite du jeûne." },
+      { icon: "🔁", title: "Reprise progressive", text: "La reprise alimentaire mérite de la progressivité. L'idée n'est pas de compenser avec un gros repas d'un coup." },
+      { icon: "📋", title: "Surveillez les symptômes", text: "Si vertiges, confusion, palpitations, faiblesse marquée ou malaise apparaissent, arrêtez le jeûne sans hésiter." },
     ],
   },
 ];

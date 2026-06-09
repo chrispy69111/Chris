@@ -13,15 +13,13 @@ function formatHistoryDate(timestamp) {
 
 function formatHistoryDuration(seconds) {
   const { h, m } = formatDuration(seconds);
-  if (h > 0) return `${h} h ${String(m).padStart(2, "0")}`;
+  if (h > 0) return `${h} h ${String(m).padStart(2, "0")} min`;
   return `${m} min`;
 }
 
 export default function HomeScreen({
   startTime,
-  h,
-  m,
-  s,
+  h, m, s,
   phase,
   coach,
   hoursElapsed,
@@ -36,11 +34,23 @@ export default function HomeScreen({
   fastHistory,
   clearHistory,
 }) {
-  const [tab, setTab] = useState("science");
+  // "coach" est le premier onglet si disponible, sinon "science"
+  const defaultTab = coach ? "coach" : "science";
+  const [tab, setTab] = useState(defaultTab);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [confirmClear, setConfirmClear] = useState(false);
   const conf = phase ? CONFIDENCE_META[phase.confidence] : null;
+
+  // Synchroniser l'onglet par défaut quand la phase change
+  // (coach apparaît dès qu'un jeûne démarre)
+  const tabs = coach
+    ? [["coach", "🧭 Coach"], ["science", "🔬 Science"], ["feelings", "💭 Ressentis"], ["tips", "💡 Conseils"]]
+    : [["science", "🔬 Science"], ["feelings", "💭 Ressentis"], ["tips", "💡 Conseils"]];
 
   return (
     <div style={S.homeWrap}>
+
+      {/* ── Chronomètre ── */}
       <div style={S.chronoCard}>
         <div style={S.chronoLabel}>depuis le dernier repas</div>
         {startTime ? (
@@ -52,91 +62,106 @@ export default function HomeScreen({
             <span style={S.chronoS}>{String(s).padStart(2, "0")}s</span>
           </div>
         ) : (
-          <div style={S.chronoIdle}>— h —</div>
+          <>
+            <div style={S.chronoIdle}>— h —</div>
+            <p style={{ margin:"10px 0 0", fontSize:13, color:"#8A9BB0", lineHeight:1.6 }}>
+              Enregistrez votre dernier repas pour<br />découvrir ce qui se passe dans votre corps.
+            </p>
+          </>
         )}
       </div>
 
-      {coach && (
-        <div style={S.coachCard}>
-          <div style={S.coachHeader}>
-            <div>
-              <p style={S.coachEyebrow}>Coach prudent</p>
-              <h3 style={S.coachTitle}>{coach.headline}</h3>
-            </div>
-            <span
-              style={{
-                ...S.badge,
-                ...(coach.proof.tone === 'high'
-                  ? S.coachProofHigh
-                  : coach.proof.tone === 'medium'
-                    ? S.coachProofMedium
-                    : S.coachProofLow),
-              }}
-            >
-              {coach.proof.label}
-            </span>
-          </div>
-
-          <p style={S.coachSummary}>{coach.summary}</p>
-
-          <div style={S.coachList}>
-            {coach.actions.map((action) => (
-              <div key={action.title} style={S.coachItem}>
-                <div style={S.coachItemTitle}>{action.title}</div>
-                <div style={S.coachItemText}>{action.text}</div>
-              </div>
-            ))}
-          </div>
-
-          {coach.safety.length > 0 && (
-            <div style={S.coachSafetyBox}>
-              <div style={S.coachSafetyTitle}>Signaux de prudence</div>
-              <ul style={S.coachSafetyList}>
-                {coach.safety.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
-
+      {/* ── Carte phase + onglets (fusionnée avec coach) ── */}
       {phase ? (
         <div style={S.phaseCard}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 20 }}>{phase.emoji}</span>
+
+          {/* En-tête phase */}
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:10 }}>
+            <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+              <span style={{ fontSize:20 }}>{phase.emoji}</span>
               <span style={S.phaseTitle}>{phase.label}</span>
             </div>
-            <span style={{ ...S.badge, background: conf.bg, color: conf.color }}>● {conf.label}</span>
+            <span style={{ ...S.badge, background:conf.bg, color:conf.color }}>● {conf.label}</span>
           </div>
 
+          {/* Barre de progression */}
           <div style={S.progressTrack}>
-            <div style={{ ...S.progressFill, width: `${progressPct}%`, background: phase.color }} />
+            <div style={{ ...S.progressFill, width:`${progressPct}%`, background:phase.color }} />
           </div>
           <div style={S.progressLabels}>
             <span>{phase.start}h</span>
-            <span style={{ color: phase.color, fontWeight: 600 }}>
-              {String(Math.floor(hoursElapsed)).padStart(2, "0")}h{String(Math.floor((hoursElapsed % 1) * 60)).padStart(2, "0")}
+            <span style={{ color:phase.color, fontWeight:600 }}>
+              {String(Math.floor(hoursElapsed)).padStart(2,"0")}h
+              {String(Math.floor((hoursElapsed % 1) * 60)).padStart(2,"0")}
             </span>
             <span>{phase.end}h</span>
           </div>
 
           <p style={S.phaseDesc}>{phase.description}</p>
 
+          {/* Onglets — Coach intégré en premier */}
           <div style={S.subTabs}>
-            {[["science", "🔬 Science"], ["feelings", "💭 Ressentis"], ["tips", "💡 Conseils"]].map(([key, label]) => (
-              <button key={key} style={tab === key ? S.subTabActive : S.subTab} onClick={() => setTab(key)}>{label}</button>
+            {tabs.map(([key, label]) => (
+              <button
+                key={key}
+                style={tab === key ? S.subTabActive : S.subTab}
+                onClick={() => setTab(key)}
+              >
+                {label}
+              </button>
             ))}
           </div>
 
+          {/* Contenu onglet Coach */}
+          {tab === "coach" && coach && (
+            <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+              <div style={S.coachHeader}>
+                <div>
+                  <p style={S.coachEyebrow}>Coach prudent</p>
+                  <h3 style={S.coachTitle}>{coach.headline}</h3>
+                </div>
+                <span style={{
+                  ...S.badge,
+                  ...(coach.proof.tone === "high" ? S.coachProofHigh
+                    : coach.proof.tone === "medium" ? S.coachProofMedium
+                    : S.coachProofLow),
+                }}>
+                  {coach.proof.label}
+                </span>
+              </div>
+
+              <p style={S.coachSummary}>{coach.summary}</p>
+
+              <div style={S.coachList}>
+                {coach.actions.map((action) => (
+                  <div key={action.title} style={S.coachItem}>
+                    <div style={S.coachItemTitle}>{action.title}</div>
+                    <div style={S.coachItemText}>{action.text}</div>
+                  </div>
+                ))}
+              </div>
+
+              {coach.safety.length > 0 && (
+                <div style={S.coachSafetyBox}>
+                  <div style={S.coachSafetyTitle}>⚠️ Signaux de prudence</div>
+                  <ul style={S.coachSafetyList}>
+                    {coach.safety.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Contenu onglet Science */}
           {tab === "science" && (
             <div style={S.contentBlock}>
-              {phase.science.map((item, index) => (
-                <div key={index} style={S.scienceItem}>
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: phase.color, flexShrink: 0, marginTop: 5 }} />
+              {phase.science.map((item, i) => (
+                <div key={i} style={S.scienceItem}>
+                  <div style={{ width:6, height:6, borderRadius:"50%", background:phase.color, flexShrink:0, marginTop:5 }} />
                   <div>
-                    <span style={{ fontSize: 12, color: "#3A4A5C", lineHeight: 1.5 }}>{item.text}</span>
+                    <span style={{ fontSize:13, color:"#3A4A5C", lineHeight:1.5 }}>{item.text}</span>
                     <span style={S.sourceTag}>{item.source}</span>
                   </div>
                 </div>
@@ -144,23 +169,25 @@ export default function HomeScreen({
             </div>
           )}
 
+          {/* Contenu onglet Ressentis */}
           {tab === "feelings" && (
             <div style={S.contentBlock}>
-              {phase.feelings.map((feeling, index) => (
-                <div key={index} style={S.feelingItem}>
-                  <span style={{ fontSize: 22, flexShrink: 0 }}>{feeling.icon}</span>
-                  <span style={{ fontSize: 13, color: "#3A4A5C", lineHeight: 1.5 }}>{feeling.text}</span>
+              {phase.feelings.map((feeling, i) => (
+                <div key={i} style={S.feelingItem}>
+                  <span style={{ fontSize:22, flexShrink:0 }}>{feeling.icon}</span>
+                  <span style={{ fontSize:13, color:"#3A4A5C", lineHeight:1.5 }}>{feeling.text}</span>
                 </div>
               ))}
             </div>
           )}
 
+          {/* Contenu onglet Conseils */}
           {tab === "tips" && (
             <div style={S.contentBlock}>
-              {phase.tips.map((tip, index) => (
-                <div key={index} style={{ ...S.tipCard, borderLeft: `3px solid ${phase.color}` }}>
+              {phase.tips.map((tip, i) => (
+                <div key={i} style={{ ...S.tipCard, borderLeft:`3px solid ${phase.color}` }}>
                   <div style={S.tipHeader}>
-                    <span style={{ fontSize: 18 }}>{tip.icon}</span>
+                    <span style={{ fontSize:18 }}>{tip.icon}</span>
                     <span style={S.tipTitle}>{tip.title}</span>
                   </div>
                   <p style={S.tipText}>{tip.text}</p>
@@ -170,24 +197,29 @@ export default function HomeScreen({
           )}
         </div>
       ) : (
-        <div style={S.phaseCard}>
-          <p style={{ color: "#8A9BB0", textAlign: "center", margin: 0, lineHeight: 1.7, fontSize: 14 }}>
-            Enregistrez votre dernier repas<br />pour commencer le suivi métabolique.
+        /* État vide — aperçu de la valeur */
+        <div style={{ ...S.phaseCard, textAlign:"center", padding:"20px 18px" }}>
+          <div style={{ fontSize:32, marginBottom:8 }}>🍽️ → 🔥 → 🫀</div>
+          <p style={{ color:"#5A6A7E", fontSize:13, lineHeight:1.7, margin:"0 0 4px" }}>
+            Chaque heure sans manger déclenche<br />des changements mesurables dans votre corps.
+          </p>
+          <p style={{ color:"#A0AABB", fontSize:11, margin:0 }}>
+            Métabo vous explique ce qui se passe, phase par phase.
           </p>
         </div>
       )}
 
+      {/* ── Actions ── */}
       {!startTime ? (
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
           {!showPicker ? (
             <>
-              <button style={S.btnPrimary} onClick={startNow}>Dernier repas : maintenant</button>
+              <button style={S.btnPrimary} onClick={startNow}>
+                Dernier repas : maintenant
+              </button>
               <button
                 style={S.btnSecondary}
-                onClick={() => {
-                  setCustomTime(nowLocal());
-                  setShowPicker(true);
-                }}
+                onClick={() => { setCustomTime(nowLocal()); setShowPicker(true); }}
               >
                 Entrer la date et l'heure
               </button>
@@ -199,10 +231,10 @@ export default function HomeScreen({
                 type="datetime-local"
                 value={customTime}
                 max={nowLocal()}
-                onChange={(event) => setCustomTime(event.target.value)}
+                onChange={(e) => setCustomTime(e.target.value)}
                 style={S.timeInput}
               />
-              <div style={{ display: "flex", gap: 10 }}>
+              <div style={{ display:"flex", gap:10 }}>
                 <button style={S.btnPrimary} onClick={startCustom}>Confirmer</button>
                 <button style={S.btnGhost} onClick={() => setShowPicker(false)}>Annuler</button>
               </div>
@@ -210,31 +242,68 @@ export default function HomeScreen({
           )}
         </div>
       ) : (
-        <button style={S.btnGhost} onClick={reset}>Terminer et enregistrer</button>
+        <button style={S.btnGhost} onClick={reset}>
+          Terminer et enregistrer
+        </button>
       )}
 
+      {/* ── Historique repliable ── */}
       {fastHistory.length > 0 && (
         <div style={S.historyCard}>
           <div style={S.historyHeader}>
             <div>
               <p style={S.historyEyebrow}>Historique local</p>
-              <h3 style={S.historyTitle}>Derniers jeûnes</h3>
+              <h3 style={S.historyTitle}>
+                {fastHistory.length} jeûne{fastHistory.length > 1 ? "s" : ""} enregistré{fastHistory.length > 1 ? "s" : ""}
+              </h3>
             </div>
-            <button style={S.historyClearBtn} onClick={clearHistory}>Vider</button>
+            <button
+              style={S.historyClearBtn}
+              onClick={() => setHistoryOpen(o => !o)}
+            >
+              {historyOpen ? "Réduire ↑" : "Voir ↓"}
+            </button>
           </div>
 
-          <div style={S.historyList}>
-            {fastHistory.map((entry) => (
-              <div key={entry.id} style={S.historyItem}>
-                <div>
-                  <div style={S.historyDuration}>{formatHistoryDuration(entry.durationSeconds)}</div>
-                  <div style={S.historyMeta}>
-                    {formatHistoryDate(entry.startTime)} → {formatHistoryDate(entry.endTime)}
+          {historyOpen && (
+            <>
+              <div style={S.historyList}>
+                {fastHistory.slice().reverse().map((entry) => (
+                  <div key={entry.id} style={S.historyItem}>
+                    <div style={S.historyDuration}>{formatHistoryDuration(entry.durationSeconds)}</div>
+                    <div style={S.historyMeta}>
+                      {formatHistoryDate(entry.startTime)} → {formatHistoryDate(entry.endTime)}
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+
+              {/* Confirmation avant suppression */}
+              {!confirmClear ? (
+                <button
+                  style={{ ...S.btnGhost, marginTop:8, width:"100%", color:"#E74C3C", borderColor:"#E74C3C" }}
+                  onClick={() => setConfirmClear(true)}
+                >
+                  Vider l'historique
+                </button>
+              ) : (
+                <div style={{ display:"flex", gap:8, marginTop:8 }}>
+                  <button
+                    style={{ ...S.btnGhost, flex:1, color:"#E74C3C", borderColor:"#E74C3C" }}
+                    onClick={() => { clearHistory(); setConfirmClear(false); setHistoryOpen(false); }}
+                  >
+                    Confirmer la suppression
+                  </button>
+                  <button
+                    style={{ ...S.btnGhost, flex:1 }}
+                    onClick={() => setConfirmClear(false)}
+                  >
+                    Annuler
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
       )}
     </div>

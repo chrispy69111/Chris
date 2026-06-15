@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PHASES } from "../../data/metaboPhases.js";
 import { S } from "./styles.js";
 
 export default function LearnScreen({ currentPhase }) {
-  const [selected, setSelected] = useState(currentPhase || PHASES[0]);
-
-  // Sync quand la phase active change pendant le jeûne
-  useEffect(() => {
-    if (currentPhase) setSelected(currentPhase);
-  }, [currentPhase?.id]);
+  const [manualSelectedId, setManualSelectedId] = useState(null);
+  const selected = PHASES.find(ph => ph.id === manualSelectedId)
+    || currentPhase
+    || PHASES[0];
 
   return (
     <div style={S.learnWrap}>
@@ -27,7 +25,7 @@ export default function LearnScreen({ currentPhase }) {
               color: selected?.id === ph.id ? "#1A2B3C" : "#5A6A7E",
               fontWeight: selected?.id === ph.id ? 600 : 400,
             }}
-            onClick={() => setSelected(ph)}
+            onClick={() => setManualSelectedId(ph.id)}
           >
             <span>{ph.emoji}</span>
             <span style={{ fontSize:13 }}>{ph.label}</span>

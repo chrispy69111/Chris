@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { CONFIDENCE_META } from "../../data/metaboPhases.js";
-import { formatDuration, nowLocal } from "../../lib/metaboState.js";
+import { formatDuration, getFastScore, nowLocal } from "../../lib/metaboState.js";
 import { S } from "./styles.js";
 
 function formatHistoryDate(timestamp) {
@@ -17,6 +17,16 @@ function formatHistoryDuration(seconds) {
   return `${m} min`;
 }
 
+function getScoreBadgeStyle(score) {
+  if (!score) return S.fastScoreMuted;
+
+  if (score.tone === "good") return S.fastScoreGood;
+  if (score.tone === "advanced") return S.fastScoreAdvanced;
+  if (score.tone === "caution") return S.fastScoreCaution;
+  if (score.tone === "base") return S.fastScoreBase;
+  return S.fastScoreMuted;
+}
+
 export default function HomeScreen({
   startTime,
   h, m, s,
@@ -25,13 +35,23 @@ export default function HomeScreen({
   hoursElapsed,
   progressPct,
   showPicker,
+  showEndPicker,
   setShowPicker,
+  setShowEndPicker,
   customTime,
+  customTimeError,
+  endTime,
+  endTimeError,
   setCustomTime,
+  setCustomTimeError,
+  setEndTime,
+  setEndTimeError,
   startNow,
   startCustom,
-  reset,
+  finishNow,
+  finishCustom,
   fastHistory,
+  historySummary,
   clearHistory,
 }) {
   // "coach" est le premier onglet si disponible, sinon "science"
@@ -209,6 +229,109 @@ export default function HomeScreen({
         </div>
       )}
 
+      {fastHistory.length > 0 && (
+        <div style={S.historyCard}>
+          <div style={S.historyHeader}>
+            <div>
+              <p style={S.historyEyebrow}>Statistiques principales</p>
+              <h3 style={S.historyTitle}>Jeûne principal du soir au premier repas</h3>
+            </div>
+          </div>
+
+          <p style={S.historyHelper}>
+            Les statistiques principales ignorent les périodes de moins de 12 h. Elles visent surtout le dernier apport calorique du soir → premier repas du lendemain.
+          </p>
+
+          <div style={S.statsGrid}>
+            <div style={S.statCard}>
+              <div style={S.statLabel}>Jeûnes principaux comptabilisés</div>
+              <div style={S.statValue}>{historySummary.mainFastCount}</div>
+            </div>
+            <div style={S.statCard}>
+              <div style={S.statLabel}>Micro-jeûnes ignorés</div>
+              <div style={S.statValue}>{historySummary.microFastCount}</div>
+            </div>
+            <div style={S.statCard}>
+              <div style={S.statLabel}>Durée moyenne principale</div>
+              <div style={S.statValue}>
+                {historySummary.mainFastCount > 0 ? formatHistoryDuration(historySummary.averageMainDurationSeconds) : "—"}
+              </div>
+            </div>
+            <div style={S.statCard}>
+              <div style={S.statLabel}>Dernier score principal</div>
+              {historySummary.latestMainFastScore ? (
+                <span style={{ ...S.badge, ...getScoreBadgeStyle(historySummary.latestMainFastScore) }}>
+                  {historySummary.latestMainFastScore.label}
+                </span>
+              ) : (
+                <div style={S.statValue}>—</div>
+              )}
+            </div>
+          </div>
+
+          <div style={S.recentStatsSection}>
+            <div>
+              <p style={S.historyEyebrow}>Fenêtres récentes</p>
+              <h4 style={S.statsSectionTitle}>Rythme sur 7 et 30 jours</h4>
+            </div>
+            <div style={S.statsGrid}>
+              <div style={S.statCard}>
+                <div style={S.statLabel}>7 derniers jours</div>
+                <div style={S.statValue}>{historySummary.last7Days.count}</div>
+                <div style={S.statSubvalue}>
+                  {historySummary.last7Days.count > 0
+                    ? `${formatHistoryDuration(historySummary.last7Days.averageDurationSeconds)} en moyenne`
+                    : "Aucun jeûne principal"}
+                </div>
+              </div>
+              <div style={S.statCard}>
+                <div style={S.statLabel}>30 derniers jours</div>
+                <div style={S.statValue}>{historySummary.last30Days.count}</div>
+                <div style={S.statSubvalue}>
+                  {historySummary.last30Days.count > 0
+                    ? `${formatHistoryDuration(historySummary.last30Days.averageDurationSeconds)} en moyenne`
+                    : "Aucun jeûne principal"}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style={S.recentStatsSection}>
+            <div>
+              <p style={S.historyEyebrow}>Meilleur récent</p>
+              <h4 style={S.statsSectionTitle}>Meilleur score des 30 derniers jours</h4>
+            </div>
+            {historySummary.bestRecentFastScore ? (
+              <div style={S.bestRecentCard}>
+                <div style={S.historyItemTopRow}>
+                  <div>
+                    <div style={S.statValue}>{formatHistoryDuration(historySummary.bestRecentFast.durationSeconds)}</div>
+                    <div style={S.statSubvalue}>
+                      terminé le {formatHistoryDate(historySummary.bestRecentFast.endTime)}
+                    </div>
+                  </div>
+                  <span style={{ ...S.badge, ...getScoreBadgeStyle(historySummary.bestRecentFastScore) }}>
+                    {historySummary.bestRecentFastScore.label}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div style={S.bestRecentCard}>
+                <div style={S.statSubvalue}>Pas encore de jeûne principal récent à comparer.</div>
+              </div>
+            )}
+          </div>
+
+          <div style={S.scoreLegend}>
+            <span style={{ ...S.badge, ...S.fastScoreMuted }}>moins de 12 h · non comptabilisé</span>
+            <span style={{ ...S.badge, ...S.fastScoreBase }}>12–15 h · base</span>
+            <span style={{ ...S.badge, ...S.fastScoreGood }}>16–18 h · très bon</span>
+            <span style={{ ...S.badge, ...S.fastScoreAdvanced }}>18–24 h · avancé</span>
+            <span style={{ ...S.badge, ...S.fastScoreCaution }}>24 h+ · prudent / ponctuel</span>
+          </div>
+        </div>
+      )}
+
       {/* ── Actions ── */}
       {!startTime ? (
         <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
@@ -219,7 +342,7 @@ export default function HomeScreen({
               </button>
               <button
                 style={S.btnSecondary}
-                onClick={() => { setCustomTime(nowLocal()); setShowPicker(true); }}
+                onClick={() => { setCustomTimeError(""); setCustomTime(nowLocal()); setShowPicker(true); }}
               >
                 Entrer la date et l'heure
               </button>
@@ -231,20 +354,59 @@ export default function HomeScreen({
                 type="datetime-local"
                 value={customTime}
                 max={nowLocal()}
-                onChange={(e) => setCustomTime(e.target.value)}
+                onChange={(e) => {
+                  setCustomTime(e.target.value);
+                  if (customTimeError) setCustomTimeError("");
+                }}
                 style={S.timeInput}
               />
+              {customTimeError && <div style={S.alertBox}>{customTimeError}</div>}
               <div style={{ display:"flex", gap:10 }}>
                 <button style={S.btnPrimary} onClick={startCustom}>Confirmer</button>
-                <button style={S.btnGhost} onClick={() => setShowPicker(false)}>Annuler</button>
+                <button style={S.btnGhost} onClick={() => { setCustomTimeError(""); setShowPicker(false); }}>Annuler</button>
               </div>
             </div>
           )}
         </div>
+      ) : showEndPicker ? (
+        <div style={S.pickerWrap}>
+          <p style={S.pickerLabel}>Date et heure de fin du jeûne</p>
+          <p style={S.pickerHelper}>
+            Utile si vous terminez votre jeûne après coup et voulez enregistrer l’heure réelle.
+          </p>
+          <input
+            type="datetime-local"
+            value={endTime}
+            min={new Date(startTime).toISOString().slice(0, 16)}
+            max={nowLocal()}
+            onChange={(e) => {
+              setEndTime(e.target.value);
+              if (endTimeError) setEndTimeError("");
+            }}
+            style={S.timeInput}
+          />
+          {endTimeError && <div style={S.alertBox}>{endTimeError}</div>}
+          <div style={S.inlineActions}>
+            <button style={S.btnPrimary} onClick={finishCustom}>Enregistrer cette heure</button>
+            <button style={S.btnGhost} onClick={() => { setEndTimeError(""); setShowEndPicker(false); }}>Annuler</button>
+          </div>
+        </div>
       ) : (
-        <button style={S.btnGhost} onClick={reset}>
-          Terminer et enregistrer
-        </button>
+        <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+          <button style={S.btnGhost} onClick={finishNow}>
+            Terminer maintenant
+          </button>
+          <button
+            style={S.btnSecondary}
+            onClick={() => {
+              setEndTimeError("");
+              setEndTime(nowLocal());
+              setShowEndPicker(true);
+            }}
+          >
+            Terminer avec une heure précise
+          </button>
+        </div>
       )}
 
       {/* ── Historique repliable ── */}
@@ -252,9 +414,9 @@ export default function HomeScreen({
         <div style={S.historyCard}>
           <div style={S.historyHeader}>
             <div>
-              <p style={S.historyEyebrow}>Historique local</p>
+              <p style={S.historyEyebrow}>Historique complet</p>
               <h3 style={S.historyTitle}>
-                {fastHistory.length} jeûne{fastHistory.length > 1 ? "s" : ""} enregistré{fastHistory.length > 1 ? "s" : ""}
+                {fastHistory.length} période{fastHistory.length > 1 ? "s" : ""} enregistrée{fastHistory.length > 1 ? "s" : ""}
               </h3>
             </div>
             <button
@@ -268,14 +430,21 @@ export default function HomeScreen({
           {historyOpen && (
             <>
               <div style={S.historyList}>
-                {fastHistory.slice().reverse().map((entry) => (
+                {fastHistory.slice().reverse().map((entry) => {
+                  const entryScore = getFastScore(entry.durationSeconds);
+
+                  return (
                   <div key={entry.id} style={S.historyItem}>
-                    <div style={S.historyDuration}>{formatHistoryDuration(entry.durationSeconds)}</div>
+                    <div style={S.historyItemTopRow}>
+                      <div style={S.historyDuration}>{formatHistoryDuration(entry.durationSeconds)}</div>
+                      <span style={{ ...S.badge, ...getScoreBadgeStyle(entryScore) }}>{entryScore.counted ? entryScore.label : "Micro-jeûne ignoré"}</span>
+                    </div>
                     <div style={S.historyMeta}>
                       {formatHistoryDate(entry.startTime)} → {formatHistoryDate(entry.endTime)}
                     </div>
                   </div>
-                ))}
+                  )
+                })}
               </div>
 
               {/* Confirmation avant suppression */}

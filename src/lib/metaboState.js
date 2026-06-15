@@ -2,6 +2,55 @@ import { PHASES } from "../data/metaboPhases.js";
 
 export const STORAGE_KEY = "metabo.startTime";
 export const FAST_HISTORY_STORAGE_KEY = "metabo.fastHistory";
+export const MIN_MAIN_FAST_DURATION_SECONDS = 12 * 3600;
+
+export const FAST_SCORE_BANDS = [
+  {
+    key: "ignored",
+    minSeconds: 0,
+    maxSeconds: MIN_MAIN_FAST_DURATION_SECONDS,
+    label: "Non comptabilisé",
+    shortLabel: "< 12 h",
+    tone: "muted",
+    counted: false,
+  },
+  {
+    key: "base",
+    minSeconds: MIN_MAIN_FAST_DURATION_SECONDS,
+    maxSeconds: 16 * 3600,
+    label: "Base",
+    shortLabel: "12–15 h",
+    tone: "base",
+    counted: true,
+  },
+  {
+    key: "very-good",
+    minSeconds: 16 * 3600,
+    maxSeconds: 18 * 3600,
+    label: "Très bon",
+    shortLabel: "16–18 h",
+    tone: "good",
+    counted: true,
+  },
+  {
+    key: "advanced",
+    minSeconds: 18 * 3600,
+    maxSeconds: 24 * 3600,
+    label: "Avancé",
+    shortLabel: "18–24 h",
+    tone: "advanced",
+    counted: true,
+  },
+  {
+    key: "prudent",
+    minSeconds: 24 * 3600,
+    maxSeconds: Number.POSITIVE_INFINITY,
+    label: "Prudent / ponctuel",
+    shortLabel: "24 h+",
+    tone: "caution",
+    counted: true,
+  },
+];
 
 export function getPhase(hours) {
   return PHASES.find(p => hours >= p.start && hours < p.end) || PHASES[PHASES.length - 1];
@@ -56,14 +105,53 @@ function normalizeFastHistoryEntry(entry, now = Date.now()) {
   return { id, startTime, endTime, durationSeconds };
 }
 
-export function buildCompletedFast(startTime, endTime = Date.now()) {
+export function validateFastEndTime(startTime, endTime, now = Date.now()) {
   const normalizedStart = Number(startTime);
   const normalizedEnd = Number(endTime);
+  const normalizedNow = Number(now);
 
-  if (!Number.isFinite(normalizedStart) || !Number.isFinite(normalizedEnd) || normalizedEnd <= normalizedStart) {
+  if (!Number.isFinite(normalizedStart) || normalizedStart <= 0) {
+    return {
+      endTime: null,
+      error: "Impossible de valider la fin du jeûne sans heure de départ valide.",
+    };
+  }
+
+  if (!Number.isFinite(normalizedEnd)) {
+    return {
+      endTime: null,
+      error: "Entrez une date et une heure de fin valides.",
+    };
+  }
+
+  if (normalizedEnd > normalizedNow) {
+    return {
+      endTime: null,
+      error: "L’heure de fin ne peut pas être dans le futur.",
+    };
+  }
+
+  if (normalizedEnd <= normalizedStart) {
+    return {
+      endTime: null,
+      error: "L’heure de fin doit être après le dernier repas enregistré.",
+    };
+  }
+
+  return {
+    endTime: normalizedEnd,
+    error: "",
+  };
+}
+
+export function buildCompletedFast(startTime, endTime = Date.now()) {
+  const validation = validateFastEndTime(startTime, endTime, endTime);
+  if (validation.error || !validation.endTime) {
     return null;
   }
 
+  const normalizedStart = Number(startTime);
+  const normalizedEnd = validation.endTime;
   const durationSeconds = Math.floor((normalizedEnd - normalizedStart) / 1000);
   if (durationSeconds <= 0) return null;
 
@@ -73,6 +161,84 @@ export function buildCompletedFast(startTime, endTime = Date.now()) {
     endTime: normalizedEnd,
     durationSeconds,
   };
+}
+
+export function getFastScore(durationSeconds) {
+  const normalized = Number(durationSeconds);
+  if (!Number.isFinite(normalized) || normalized < 0) {
+    return FAST_SCORE_BANDS[0];
+  }
+
+  return FAST_SCORE_BANDS.find(
+    band => normalized >= band.minSeconds && normalized < band.maxSeconds,
+  ) || FAST_SCORE_BANDS[FAST_SCORE_BANDS.length - 1];
+}
+
+function buildRecentMainFastSummary(mainFasts, days, now) {
+  const cutoff = now - days * 24 * 3600 * 1000;
+  const recentFasts = mainFasts.filter(entry => Number(entry.endTime) >= cutoff);
+  const averageDurationSeconds = recentFasts.length > 0
+    ? Math.round(recentFasts.reduce((sum, entry) => sum + Number(entry.durationSeconds), 0) / recentFasts.length)
+    : 0;
+
+  return {
+    days,
+    count: recentFasts.length,
+    averageDurationSeconds,
+    fasts: recentFasts,
+  };
+}
+
+export function summarizeFastHistory(history, now = Date.now()) {
+  const safeHistory = Array.isArray(history)
+    ? history.filter(entry => entry && Number.isFinite(Number(entry.durationSeconds)))
+    : [];
+
+  const mainFasts = safeHistory.filter(
+    entry => Number(entry.durationSeconds) >= MIN_MAIN_FAST_DURATION_SECONDS,
+  );
+  const microFasts = safeHistory.filter(
+    entry => Number(entry.durationSeconds) < MIN_MAIN_FAST_DURATION_SECONDS,
+  );
+  const latestMainFast = mainFasts[0] || null;
+  const averageMainDurationSeconds = mainFasts.length > 0
+    ? Math.round(mainFasts.reduce((sum, entry) => sum + Number(entry.durationSeconds), 0) / mainFasts.length)
+    : 0;
+  const last7Days = buildRecentMainFastSummary(mainFasts, 7, now);
+  const last30Days = buildRecentMainFastSummary(mainFasts, 30, now);
+  const bestRecentFast = last30Days.fasts.reduce((best, entry) => {
+    if (!best || Number(entry.durationSeconds) > Number(best.durationSeconds)) return entry;
+    return best;
+  }, null);
+
+  return {
+    totalFasts: safeHistory.length,
+    mainFastCount: mainFasts.length,
+    microFastCount: microFasts.length,
+    mainFasts,
+    microFasts,
+    latestMainFast,
+    latestMainFastScore: latestMainFast ? getFastScore(latestMainFast.durationSeconds) : null,
+    averageMainDurationSeconds,
+    last7Days,
+    last30Days,
+    bestRecentFast,
+    bestRecentFastScore: bestRecentFast ? getFastScore(bestRecentFast.durationSeconds) : null,
+  };
+}
+
+export function findOverlappingFast(history, proposedStartTime) {
+  const normalizedStart = Number(proposedStartTime);
+  if (!Number.isFinite(normalizedStart)) return null;
+
+  const safeHistory = Array.isArray(history) ? history : [];
+
+  return safeHistory.find((entry) => {
+    const entryStart = Number(entry?.startTime);
+    const entryEnd = Number(entry?.endTime);
+    if (!Number.isFinite(entryStart) || !Number.isFinite(entryEnd)) return false;
+    return normalizedStart < entryEnd && normalizedStart >= entryStart;
+  }) || null;
 }
 
 export function appendFastHistory(history, entry, limit = 10) {

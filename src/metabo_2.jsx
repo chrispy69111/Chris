@@ -9,13 +9,16 @@ import {
   appendFastHistory,
   buildCompletedFast,
   calculateElapsedSeconds,
+  findOverlappingFast,
   formatDuration,
   getPhase,
   nowLocal,
   readStoredFastHistory,
   readStoredStartTime,
+  summarizeFastHistory,
   syncStoredFastHistory,
   syncStoredStartTime,
+  validateFastEndTime,
 } from "./lib/metaboState.js";
 
 export default function Metabo() {
@@ -28,6 +31,10 @@ export default function Metabo() {
   });
   const [showPicker, setShowPicker] = useState(false);
   const [customTime, setCustomTime] = useState("");
+  const [customTimeError, setCustomTimeError] = useState("");
+  const [showEndPicker, setShowEndPicker] = useState(false);
+  const [endTime, setEndTime] = useState("");
+  const [endTimeError, setEndTimeError] = useState("");
 
   useEffect(() => {
     if (!startTime) return;
@@ -50,9 +57,14 @@ export default function Metabo() {
   const hoursElapsed = elapsed / 3600;
   const phase = startTime ? getPhase(hoursElapsed) : null;
   const coach = startTime ? buildFastingCoach(hoursElapsed) : null;
+  const historySummary = summarizeFastHistory(fastHistory);
   const { h, m, s } = formatDuration(elapsed);
 
   function startNow() {
+    setCustomTimeError("");
+    setEndTimeError("");
+    setShowEndPicker(false);
+    setEndTime("");
     setStartTime(Date.now());
     setElapsed(0);
     setShowPicker(false);
@@ -63,27 +75,67 @@ export default function Metabo() {
     const t = new Date(val);
     if (isNaN(t.getTime()) || t > new Date()) return;
 
+    const overlappingFast = findOverlappingFast(fastHistory, t.getTime());
+    if (overlappingFast) {
+      setCustomTimeError(
+        `Chevauchement détecté : ce jeûne commencerait avant la fin d’un jeûne déjà enregistré (${new Date(overlappingFast.endTime).toLocaleString("fr-CA", { dateStyle: "medium", timeStyle: "short" })}). Corrigez l’heure avant de continuer.`,
+      );
+      return;
+    }
+
+    setCustomTimeError("");
+    setEndTimeError("");
     setStartTime(t.getTime());
     setElapsed(calculateElapsedSeconds(t.getTime()));
     setShowPicker(false);
+    setShowEndPicker(false);
+    setEndTime("");
   }
 
-  function reset() {
-    if (startTime) {
-      const completedFast = buildCompletedFast(startTime, Date.now());
-      if (completedFast) {
-        setFastHistory(current => appendFastHistory(current, completedFast));
-      }
+  function finalizeFast(completedFast) {
+    if (completedFast) {
+      setFastHistory(current => appendFastHistory(current, completedFast));
     }
 
+    setCustomTimeError("");
+    setEndTimeError("");
     setStartTime(null);
     setElapsed(0);
     setCustomTime("");
+    setEndTime("");
     setShowPicker(false);
+    setShowEndPicker(false);
+  }
+
+  function finishNow() {
+    if (!startTime) return;
+    finalizeFast(buildCompletedFast(startTime, Date.now()));
+  }
+
+  function finishCustom() {
+    if (!startTime) return;
+
+    const value = endTime || nowLocal();
+    const parsedEnd = new Date(value).getTime();
+    const validation = validateFastEndTime(startTime, parsedEnd);
+
+    if (validation.error || !validation.endTime) {
+      setEndTimeError(validation.error || "Entrez une date et une heure de fin valides.");
+      return;
+    }
+
+    const completedFast = buildCompletedFast(startTime, validation.endTime);
+    if (!completedFast) {
+      setEndTimeError("Impossible d’enregistrer ce jeûne avec cette heure de fin.");
+      return;
+    }
+
+    finalizeFast(completedFast);
   }
 
   function clearHistory() {
     setFastHistory([]);
+    setCustomTimeError("");
   }
 
   const progressPct = phase
@@ -107,16 +159,26 @@ export default function Metabo() {
             clearHistory={clearHistory}
             coach={coach}
             customTime={customTime}
+            customTimeError={customTimeError}
+            endTime={endTime}
+            endTimeError={endTimeError}
             fastHistory={fastHistory}
+            finishCustom={finishCustom}
+            finishNow={finishNow}
+            historySummary={historySummary}
             h={h}
             hoursElapsed={hoursElapsed}
             m={m}
             phase={phase}
             progressPct={progressPct}
-            reset={reset}
             s={s}
             setCustomTime={setCustomTime}
+            setCustomTimeError={setCustomTimeError}
+            setEndTime={setEndTime}
+            setEndTimeError={setEndTimeError}
+            setShowEndPicker={setShowEndPicker}
             setShowPicker={setShowPicker}
+            showEndPicker={showEndPicker}
             showPicker={showPicker}
             startCustom={startCustom}
             startNow={startNow}
